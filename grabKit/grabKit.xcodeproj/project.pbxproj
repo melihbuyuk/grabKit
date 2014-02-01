@@ -66,10 +66,6 @@
 		5F8E24AB16A7F8660090F93B /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F8E24A916A7F8660090F93B /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		5F990C2D1702D2A500B89A7B /* GRKPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F654F3916C2752B00991DE6 /* GRKPickerViewController.m */; };
 		5F990C331702D73A00B89A7B /* GRKPickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F654F3816C2752B00991DE6 /* GRKPickerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5F990C371702DAC200B89A7B /* facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F52969616BAB63D007CA510 /* facebook.png */; };
-		5F990C381702DAC200B89A7B /* flickr.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F52969716BAB63D007CA510 /* flickr.png */; };
-		5F990C391702DAC200B89A7B /* instagram.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F52969816BAB63D007CA510 /* instagram.png */; };
-		5F990C3A1702DAC200B89A7B /* picasa.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F52969A16BAB63D007CA510 /* picasa.png */; };
 		5F990C3B1702DAC200B89A7B /* thumbnail_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F52969B16BAB63D007CA510 /* thumbnail_placeholder.png */; };
 		5F990C3C1702DAC200B89A7B /* thumbnail_placeholder@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F52969C16BAB63D007CA510 /* thumbnail_placeholder@2X.png */; };
 		5F990C3D1702E5FE00B89A7B /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FB1362716ADAD2700BE500B /* GTMOAuth2ViewTouch.xib */; };
@@ -392,6 +388,22 @@
 		5FF1FF3715BF21FF00EF2CE4 /* GRKServiceQueryProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F3C2D0915B9F945008D894A /* GRKServiceQueryProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5FF1FF3815BF21FF00EF2CE4 /* GRKTokenStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F3C2D0B15B9F945008D894A /* GRKTokenStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5FF1FF3915BF21FF00EF2CE4 /* GRKTokenStoreUserDefaults.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F3C2D0D15B9F945008D894A /* GRKTokenStoreUserDefaults.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		88CDC393189D0B6800B06553 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88CDC392189D0B6800B06553 /* FacebookSDK.framework */; };
+		88CDC394189D0B8100B06553 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88CDC392189D0B6800B06553 /* FacebookSDK.framework */; };
+		88CDC3A3189D1C9E00B06553 /* facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 88CDC39B189D1C9E00B06553 /* facebook.png */; };
+		88CDC3A4189D1C9E00B06553 /* facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88CDC39C189D1C9E00B06553 /* facebook@2x.png */; };
+		88CDC3A5189D1C9E00B06553 /* flickr.png in Resources */ = {isa = PBXBuildFile; fileRef = 88CDC39D189D1C9E00B06553 /* flickr.png */; };
+		88CDC3A6189D1C9E00B06553 /* flickr@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88CDC39E189D1C9E00B06553 /* flickr@2x.png */; };
+		88CDC3A7189D1C9E00B06553 /* instagram.png in Resources */ = {isa = PBXBuildFile; fileRef = 88CDC39F189D1C9E00B06553 /* instagram.png */; };
+		88CDC3A8189D1C9E00B06553 /* instagram@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88CDC3A0189D1C9E00B06553 /* instagram@2x.png */; };
+		88CDC3A9189D1C9E00B06553 /* picasa.png in Resources */ = {isa = PBXBuildFile; fileRef = 88CDC3A1189D1C9E00B06553 /* picasa.png */; };
+		88CDC3AA189D1C9E00B06553 /* picasa@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88CDC3A2189D1C9E00B06553 /* picasa@2x.png */; };
+		88CDC3AD189D328B00B06553 /* network-header.png in Resources */ = {isa = PBXBuildFile; fileRef = 88CDC3AB189D328B00B06553 /* network-header.png */; };
+		88CDC3AE189D328B00B06553 /* network-header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88CDC3AC189D328B00B06553 /* network-header@2x.png */; };
+		88CDC3B3189D3D9400B06553 /* social-camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 88CDC3AF189D3D9400B06553 /* social-camera.png */; };
+		88CDC3B4189D3D9400B06553 /* social-camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88CDC3B0189D3D9400B06553 /* social-camera@2x.png */; };
+		88CDC3B5189D3D9400B06553 /* social-picker.png in Resources */ = {isa = PBXBuildFile; fileRef = 88CDC3B1189D3D9400B06553 /* social-picker.png */; };
+		88CDC3B6189D3D9400B06553 /* social-picker@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88CDC3B2189D3D9400B06553 /* social-picker@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -504,10 +516,6 @@
 		5F52969216BAB63D007CA510 /* GRKPickerAlbumsListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GRKPickerAlbumsListCell.xib; sourceTree = "<group>"; };
 		5F52969316BAB63D007CA510 /* GRKPickerServicesList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRKPickerServicesList.h; sourceTree = "<group>"; };
 		5F52969416BAB63D007CA510 /* GRKPickerServicesList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRKPickerServicesList.m; sourceTree = "<group>"; };
-		5F52969616BAB63D007CA510 /* facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook.png; sourceTree = "<group>"; };
-		5F52969716BAB63D007CA510 /* flickr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flickr.png; sourceTree = "<group>"; };
-		5F52969816BAB63D007CA510 /* instagram.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = instagram.png; sourceTree = "<group>"; };
-		5F52969A16BAB63D007CA510 /* picasa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = picasa.png; sourceTree = "<group>"; };
 		5F52969B16BAB63D007CA510 /* thumbnail_placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumbnail_placeholder.png; sourceTree = "<group>"; };
 		5F52969C16BAB63D007CA510 /* thumbnail_placeholder@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbnail_placeholder@2X.png"; sourceTree = "<group>"; };
 		5F585B2416CAD92D0023401D /* GrabKitDemoHomeViewController-ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "GrabKitDemoHomeViewController-ipad.xib"; sourceTree = "<group>"; };
@@ -801,6 +809,21 @@
 		5FEE8C1816FC3C55002C995B /* GRKFlickrSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRKFlickrSingleton.m; sourceTree = "<group>"; };
 		5FEE9DEB15DF6CC900C44501 /* GRKPicasaQueriesQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRKPicasaQueriesQueue.h; sourceTree = "<group>"; };
 		5FEE9DEC15DF6CC900C44501 /* GRKPicasaQueriesQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRKPicasaQueriesQueue.m; sourceTree = "<group>"; };
+		88CDC392189D0B6800B06553 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = "../../../../Desktop/facebook-ios-sdk-master/build/FacebookSDK.framework"; sourceTree = "<group>"; };
+		88CDC39B189D1C9E00B06553 /* facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook.png; sourceTree = "<group>"; };
+		88CDC39C189D1C9E00B06553 /* facebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook@2x.png"; sourceTree = "<group>"; };
+		88CDC39D189D1C9E00B06553 /* flickr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flickr.png; sourceTree = "<group>"; };
+		88CDC39E189D1C9E00B06553 /* flickr@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flickr@2x.png"; sourceTree = "<group>"; };
+		88CDC39F189D1C9E00B06553 /* instagram.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = instagram.png; sourceTree = "<group>"; };
+		88CDC3A0189D1C9E00B06553 /* instagram@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "instagram@2x.png"; sourceTree = "<group>"; };
+		88CDC3A1189D1C9E00B06553 /* picasa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = picasa.png; sourceTree = "<group>"; };
+		88CDC3A2189D1C9E00B06553 /* picasa@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "picasa@2x.png"; sourceTree = "<group>"; };
+		88CDC3AB189D328B00B06553 /* network-header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "network-header.png"; sourceTree = "<group>"; };
+		88CDC3AC189D328B00B06553 /* network-header@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "network-header@2x.png"; sourceTree = "<group>"; };
+		88CDC3AF189D3D9400B06553 /* social-camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "social-camera.png"; sourceTree = "<group>"; };
+		88CDC3B0189D3D9400B06553 /* social-camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "social-camera@2x.png"; sourceTree = "<group>"; };
+		88CDC3B1189D3D9400B06553 /* social-picker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "social-picker.png"; sourceTree = "<group>"; };
+		88CDC3B2189D3D9400B06553 /* social-picker@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "social-picker@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -808,6 +831,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88CDC393189D0B6800B06553 /* FacebookSDK.framework in Frameworks */,
 				5F990C461702F41000B89A7B /* GrabKitLib.a in Frameworks */,
 				5F8E24AA16A7F8660090F93B /* Accounts.framework in Frameworks */,
 				5F8E24AB16A7F8660090F93B /* AdSupport.framework in Frameworks */,
@@ -844,6 +868,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88CDC394189D0B8100B06553 /* FacebookSDK.framework in Frameworks */,
 				5FD3999815BF1E2B0063542C /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -876,6 +901,7 @@
 		5F3C2B4D15B9F7FC008D894A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				88CDC392189D0B6800B06553 /* FacebookSDK.framework */,
 				5F990C471702F42200B89A7B /* Social.framework */,
 				5FD46C9316B9122800EE496F /* QuartzCore.framework */,
 				5F8E24A816A7F8660090F93B /* Accounts.framework */,
@@ -1154,11 +1180,21 @@
 		5F52969516BAB63D007CA510 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				88CDC3AF189D3D9400B06553 /* social-camera.png */,
+				88CDC3B0189D3D9400B06553 /* social-camera@2x.png */,
+				88CDC3B1189D3D9400B06553 /* social-picker.png */,
+				88CDC3B2189D3D9400B06553 /* social-picker@2x.png */,
+				88CDC3AB189D328B00B06553 /* network-header.png */,
+				88CDC3AC189D328B00B06553 /* network-header@2x.png */,
+				88CDC39B189D1C9E00B06553 /* facebook.png */,
+				88CDC39C189D1C9E00B06553 /* facebook@2x.png */,
+				88CDC39D189D1C9E00B06553 /* flickr.png */,
+				88CDC39E189D1C9E00B06553 /* flickr@2x.png */,
+				88CDC39F189D1C9E00B06553 /* instagram.png */,
+				88CDC3A0189D1C9E00B06553 /* instagram@2x.png */,
+				88CDC3A1189D1C9E00B06553 /* picasa.png */,
+				88CDC3A2189D1C9E00B06553 /* picasa@2x.png */,
 				5F5DB41816C189F200C6C9E3 /* splashscreen4in.png */,
-				5F52969616BAB63D007CA510 /* facebook.png */,
-				5F52969716BAB63D007CA510 /* flickr.png */,
-				5F52969816BAB63D007CA510 /* instagram.png */,
-				5F52969A16BAB63D007CA510 /* picasa.png */,
 				5F52969B16BAB63D007CA510 /* thumbnail_placeholder.png */,
 				5F52969C16BAB63D007CA510 /* thumbnail_placeholder@2X.png */,
 				5F8CC03116D918E800307678 /* thumbnail_selected.png */,
@@ -1894,8 +1930,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0500;
+				TargetAttributes = {
+					5F3C2B4915B9F7FC008D894A = {
+						DevelopmentTeam = LW4W52CPDV;
+					};
+				};
 			};
-			buildConfigurationList = 5F3C2B4415B9F7FC008D894A /* Build configuration list for PBXProject "GrabKit" */;
+			buildConfigurationList = 5F3C2B4415B9F7FC008D894A /* Build configuration list for PBXProject "grabKit" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1924,10 +1965,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88CDC3AE189D328B00B06553 /* network-header@2x.png in Resources */,
 				5F990C431702EF6800B89A7B /* GrabKitDemoHomeViewController.xib in Resources */,
+				88CDC3B4189D3D9400B06553 /* social-camera@2x.png in Resources */,
 				5F21A889182E1DC800721AFD /* Default-568h@2x.png in Resources */,
+				88CDC3B5189D3D9400B06553 /* social-picker.png in Resources */,
+				88CDC3A3189D1C9E00B06553 /* facebook.png in Resources */,
+				88CDC3B3189D3D9400B06553 /* social-camera.png in Resources */,
+				88CDC3A7189D1C9E00B06553 /* instagram.png in Resources */,
 				5F990C441702EF6C00B89A7B /* GrabKitDemoHomeViewController-ipad.xib in Resources */,
+				88CDC3A5189D1C9E00B06553 /* flickr.png in Resources */,
+				88CDC3AD189D328B00B06553 /* network-header.png in Resources */,
+				88CDC3B6189D3D9400B06553 /* social-picker@2x.png in Resources */,
+				88CDC3A6189D1C9E00B06553 /* flickr@2x.png in Resources */,
+				88CDC3A8189D1C9E00B06553 /* instagram@2x.png in Resources */,
+				88CDC3A4189D1C9E00B06553 /* facebook@2x.png in Resources */,
+				88CDC3A9189D1C9E00B06553 /* picasa.png in Resources */,
 				5FC4D13A175F48BF00EEADFD /* GrabKitBundle.bundle in Resources */,
+				88CDC3AA189D1C9E00B06553 /* picasa@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1944,10 +1999,6 @@
 				5F8CC03416D918E800307678 /* thumbnail_selected.png in Resources */,
 				5F8CC03616D918E800307678 /* thumbnail_selected@2x.png in Resources */,
 				5F8B84BE16F793C800ADCC8D /* GrabKitPicker.strings in Resources */,
-				5F990C371702DAC200B89A7B /* facebook.png in Resources */,
-				5F990C381702DAC200B89A7B /* flickr.png in Resources */,
-				5F990C391702DAC200B89A7B /* instagram.png in Resources */,
-				5F990C3A1702DAC200B89A7B /* picasa.png in Resources */,
 				5F990C3B1702DAC200B89A7B /* thumbnail_placeholder.png in Resources */,
 				5F990C3C1702DAC200B89A7B /* thumbnail_placeholder@2X.png in Resources */,
 			);
@@ -2306,7 +2357,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/imac/Desktop/facebook-ios-sdk-master/build",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GrabKit/GrabKitDemo/grabKitDemo-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -2332,7 +2386,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/imac/Desktop/facebook-ios-sdk-master/build",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GrabKit/GrabKitDemo/grabKitDemo-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -2440,7 +2497,10 @@
 			buildSettings = {
 				DSTROOT = /tmp/GrabKitLib.dst;
 				EXECUTABLE_PREFIX = "";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/imac/Desktop/facebook-ios-sdk-master/build",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GrabKitLib/GrabKitLib-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -2460,7 +2520,10 @@
 			buildSettings = {
 				DSTROOT = /tmp/GrabKitLib.dst;
 				EXECUTABLE_PREFIX = "";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/imac/Desktop/facebook-ios-sdk-master/build",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GrabKitLib/GrabKitLib-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -2478,7 +2541,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5F3C2B4415B9F7FC008D894A /* Build configuration list for PBXProject "GrabKit" */ = {
+		5F3C2B4415B9F7FC008D894A /* Build configuration list for PBXProject "grabKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5F3C2B7515B9F7FC008D894A /* Debug */,

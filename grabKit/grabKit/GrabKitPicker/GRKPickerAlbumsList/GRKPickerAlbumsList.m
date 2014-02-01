@@ -525,7 +525,12 @@ NSUInteger kMaximumRetriesCount = 1;
         
     }
 
-    
+    if ( ! [@[@"7.0"] containsObject:[[UIDevice currentDevice] systemVersion]] ){
+        
+        	self.tableView.contentOffset = CGPointZero;
+	        self.tableView.contentInset = UIEdgeInsetsZero;
+    }
+
     
 }
 

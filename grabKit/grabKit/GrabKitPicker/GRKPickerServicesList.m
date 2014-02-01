@@ -52,38 +52,38 @@
         // build a dictionary per service
         #if GRK_FACEBOOK_SERVICE
         NSDictionary * facebook = [NSDictionary dictionaryWithObjectsAndKeys:@"GRKFacebookGrabber", @"class",
-                                   @"Facebook", @"title",
+                                   @"Facebook", @"title", @"facebook.png", @"images",
                                    nil];
         [services addObject:facebook];
         #endif
         
         #if GRK_FLICKR_SERVICE
         NSDictionary * flickr = [NSDictionary dictionaryWithObjectsAndKeys:@"GRKFlickrGrabber", @"class", 
-                                 @"FlickR", @"title",
+                                 @"FlickR", @"title", @"flickr.png", @"images",
                                  nil];
         [services addObject:flickr];
         #endif
         
         #if GRK_INSTAGRAM_SERVICE
         NSDictionary * instagram = [NSDictionary dictionaryWithObjectsAndKeys:@"GRKInstagramGrabber", @"class", 
-                                    @"Instagram", @"title",
+                                    @"Instagram", @"title", @"instagram.png", @"images",
                                     nil];
         [services addObject:instagram];
         #endif
         
         #if GRK_PICASA_SERVICE
         NSDictionary * picasa = [NSDictionary dictionaryWithObjectsAndKeys:@"GRKPicasaGrabber", @"class", 
-                                 @"Picasa", @"title",
+                                 @"Picasa", @"title", @"picasa.png", @"images",
                                  nil];
         [services addObject:picasa];
         #endif
         
-        #if GRK_DEVICE_SERVICE
-        NSDictionary * device = [NSDictionary dictionaryWithObjectsAndKeys:@"GRKDeviceGrabber", @"class", 
-                                 (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)?@"iPad":@"iPhone", @"title",
-                                 nil];
-        [services addObject:device];
-        #endif
+//        #if GRK_DEVICE_SERVICE
+//        NSDictionary * device = [NSDictionary dictionaryWithObjectsAndKeys:@"GRKDeviceGrabber", @"class", 
+//                                 (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)?@"iPad":@"iPhone", @"title",
+//                                 nil];
+//        [services addObject:device];
+//        #endif
         
 
         //services = [[NSArray alloc] initWithObjects:facebook, flickr, instagram, picasa, device, nil];
@@ -110,14 +110,22 @@
     
     self.navigationItem.title = GRK_i18n(@"GRK_SERVICES_LIST_TITLE", @"Network");
 
-    self.tableView.rowHeight = 54;
+    self.tableView.rowHeight = 56;
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+    }
     
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:218.0f/255.0f green:86.0f/255.0f blue:42.0f/255.0f alpha:1.0f];
+    
+    self.tableView.separatorColor = [UIColor colorWithRed:218.0f/255.0f green:218.0f/255.0f blue:218.0f/255.0f alpha:1.0f];
+    
+    self.tableView.backgroundColor = [UIColor clearColor]; //[UIColor colorWithRed:241.0f/255.0f green:241.0f/255.0f blue:241.0f/255.0f alpha:1.0f];
+    self.view.backgroundColor = [UIColor colorWithRed:241.0f/255.0f green:241.0f/255.0f blue:241.0f/255.0f alpha:1.0f];
+    
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    
+//    self.tableView.tableHeaderView.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"network-header.png"]];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(didTouchCancelButton)];
  
@@ -143,15 +151,24 @@
     [super viewWillAppear:animated];
  
     // fix for iOS6.x
-	if ( ! [@[@"7.0"] containsObject:[[UIDevice currentDevice] systemVersion]] ){
-	
-    	if ( [[GRKPickerViewController sharedInstance] isPresentedInPopover] ) {
-        	self.tableView.contentOffset = CGPointZero;
-	        self.tableView.contentInset = UIEdgeInsetsZero;
-    	}
-    }
+//	if ( ! [@[@"7.0"] containsObject:[[UIDevice currentDevice] systemVersion]] ){
+//	
+//    	if ( [[GRKPickerViewController sharedInstance] isPresentedInPopover] ) {
+//        	self.tableView.contentOffset = CGPointZero;
+//	        self.tableView.contentInset = UIEdgeInsetsZero;
+//            
+//    	}
+//    }
 
-
+//    CGFloat tableViewOriginX  = self.tableView.frame.origin.x;
+//    CGFloat tableViewOriginY  = self.tableView.frame.origin.y;
+//    CGFloat tableViewWidth    = self.tableView.frame.size.width;
+//    CGFloat tableViewHeight   = self.tableView.frame.size.height;
+    
+//    self.tableView.frame = CGRectMake(0, 310, self.view.frame.size.width,200);
+    
+    UIEdgeInsets inset = UIEdgeInsetsMake(20, 0, 0, 0);
+    self.tableView.contentInset = inset;
     
 }
 
@@ -182,33 +199,123 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
-    return [services count];
+    if (section == 0)
+        return [services count];
+    else
+        return 2;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if (section == 1) {
+        tableView.tableHeaderView.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"network-header.png"]];
+        return @"Cihaz";
+    }
+    
+    return nil;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    
+    if (section == 1) {
+        UIImage *myImage = [UIImage imageNamed:@"network-header.png"];
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:myImage];
+        return imageView;
+    }
+    return nil;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (section == 1) {
+        return 33;
+    }
+    return 0;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    if (section == 0)
+        return 20;
+    else
+        return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    if (indexPath.section == 0) {
+        
+        static NSString *CellIdentifier = @"Cell";
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        }
+        
+        NSString * serviceName = [(NSDictionary *)[services objectAtIndex:indexPath.row] objectForKey:@"title"];
+        cell.textLabel.text = serviceName;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ Resimlerini Kullan", serviceName];
+        
+        NSString * iconName = [(NSDictionary *)[services objectAtIndex:indexPath.row] objectForKey:@"images"];
+        cell.imageView.image = [UIImage imageNamed:iconName];
+        
+        return cell;
+    }else
+    {
+        if (indexPath.row == 0) {
+            static NSString *CellIdentifier = @"Cell";
+            
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (cell == nil) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+            }
+            
+            cell.textLabel.text = @"Iphone Resimleri";
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            
+            cell.detailTextLabel.text = @"Iphone Resimlerini Kullan";
+            
+            //        NSString * iconName = [(NSDictionary *)[services objectAtIndex:indexPath.row] objectForKey:@"images"];
+            cell.imageView.image = [UIImage imageNamed:@"social-picker.png"];
+            
+            return cell;
+        }else
+        {
+            static NSString *CellIdentifier = @"Cell";
+            
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (cell == nil) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+            }
+            
+            cell.textLabel.text = @"Resim Cek";
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            
+            cell.detailTextLabel.text = @"Yeni Bir Resim Cek";
+            
+            //        NSString * iconName = [(NSDictionary *)[services objectAtIndex:indexPath.row] objectForKey:@"images"];
+            cell.imageView.image = [UIImage imageNamed:@"social-camera.png"];
+            
+            return cell;
+        }
+        
     }
     
-    NSString * serviceName = [(NSDictionary *)[services objectAtIndex:indexPath.row] objectForKey:@"title"];
-    cell.textLabel.text = serviceName;
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+}
 
-    NSString * path = [GRK_BUNDLE pathForResource:[serviceName lowercaseString] ofType:@"png"];
-    cell.imageView.image = [UIImage imageWithContentsOfFile:path];
-    cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
-
-    return cell;
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    cell.textLabel.textColor = [UIColor colorWithRed:73.0f/255.0f green:73.0f/255.0f blue:75.0f/255.0f alpha:1.0f];
+    cell.textLabel.font = [UIFont fontWithName:@"DINCondensed-Bold" size:15];
+    cell.detailTextLabel.textColor = [UIColor colorWithRed:176.0f/255.0f green:176.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
+    cell.detailTextLabel.font = [UIFont fontWithName:@"DINCondensed-Bold" size:12];
 }
 
 
