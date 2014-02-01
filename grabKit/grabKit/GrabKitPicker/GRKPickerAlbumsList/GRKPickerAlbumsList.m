@@ -116,13 +116,37 @@ NSUInteger kMaximumRetriesCount = 1;
             
             DECREASE_OPERATIONS_COUNT
             
-            _needToConnectView.alpha = 0;
+//            _needToConnectView.alpha = 0;
             _needToConnectView.hidden = NO;
 
-            NSString * needToConnectString = GRK_i18n(@"GRK_ALBUMS_LIST_NEED_TO_CONNECT", @"You need to connect to %serviceName%");
-            _needToConnectLabel.text = [needToConnectString stringByReplacingOccurrencesOfString:@"%serviceName%" withString:_grabber.serviceName];
-
-            [_connectButton setTitle:GRK_i18n(@"GRK_ALBUMS_LIST_CONNECT_BUTTON",@"Login") forState:UIControlStateNormal];
+            _needToConnectView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"login-page.png"]];
+                        
+            UIColor *textColor;
+            
+            if ([_grabber.serviceName isEqualToString:@"FlickR"]) {
+                textColor = [UIColor colorWithRed:255.0f/255.0f green:0.0f/255.0f blue:132.0f/255.0f alpha:1.0f];
+            }
+            else if ([_grabber.serviceName isEqualToString:@"Facebook"])
+            {
+                textColor = [UIColor colorWithRed:59.0f/255.0f green:89.0f/255.0f blue:152.0f/255.0f alpha:1.0f];
+            }
+            else if ([_grabber.serviceName isEqualToString:@"Instagram"])
+            {
+                textColor = [UIColor colorWithRed:63.0f/255.0f green:114.0f/255.0f blue:155.0f/255.0f alpha:1.0f];
+            }
+            else if ([_grabber.serviceName isEqualToString:@"Picasa"])
+            {
+                textColor = [UIColor colorWithRed:221.0f/255.0f green:75.0f/255.0f blue:57.0f/255.0f alpha:1.0f];
+            }
+            
+            
+//            NSString * needToConnectString = GRK_i18n(@"GRK_ALBUMS_LIST_NEED_TO_CONNECT", @"%serviceName%");
+            _needToConnectLabel.text = _grabber.serviceName;
+            _needToConnectLabel.textColor = textColor;
+            _needToConnectLabel.font = [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:19];
+//            [_connectButton setTitle:GRK_i18n(@"GRK_ALBUMS_LIST_CONNECT_BUTTON",@"Login") forState:UIControlStateNormal];
+            
+            [_connectButton setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@-button.png",[_grabber.serviceName lowercaseString]]] forState:UIControlStateNormal];
             
             [UIView animateWithDuration:0.33 animations:^{
 

@@ -120,12 +120,10 @@
     
     self.tableView.separatorColor = [UIColor colorWithRed:218.0f/255.0f green:218.0f/255.0f blue:218.0f/255.0f alpha:1.0f];
     
-    self.tableView.backgroundColor = [UIColor clearColor]; //[UIColor colorWithRed:241.0f/255.0f green:241.0f/255.0f blue:241.0f/255.0f alpha:1.0f];
+    self.tableView.backgroundColor = [UIColor clearColor];
     self.view.backgroundColor = [UIColor colorWithRed:241.0f/255.0f green:241.0f/255.0f blue:241.0f/255.0f alpha:1.0f];
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    
-//    self.tableView.tableHeaderView.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"network-header.png"]];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(didTouchCancelButton)];
  
@@ -149,23 +147,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
- 
-    // fix for iOS6.x
-//	if ( ! [@[@"7.0"] containsObject:[[UIDevice currentDevice] systemVersion]] ){
-//	
-//    	if ( [[GRKPickerViewController sharedInstance] isPresentedInPopover] ) {
-//        	self.tableView.contentOffset = CGPointZero;
-//	        self.tableView.contentInset = UIEdgeInsetsZero;
-//            
-//    	}
-//    }
-
-//    CGFloat tableViewOriginX  = self.tableView.frame.origin.x;
-//    CGFloat tableViewOriginY  = self.tableView.frame.origin.y;
-//    CGFloat tableViewWidth    = self.tableView.frame.size.width;
-//    CGFloat tableViewHeight   = self.tableView.frame.size.height;
-    
-//    self.tableView.frame = CGRectMake(0, 310, self.view.frame.size.width,200);
     
     UIEdgeInsets inset = UIEdgeInsetsMake(20, 0, 0, 0);
     self.tableView.contentInset = inset;
