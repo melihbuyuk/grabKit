@@ -40,7 +40,7 @@
 	return @"350975928312519";
 #else
     #warning Facebook AppId should be set
-    return @"";
+    return @"350975928312519";
 #endif
 
 }
