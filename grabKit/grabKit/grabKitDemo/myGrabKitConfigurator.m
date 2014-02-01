@@ -55,7 +55,7 @@
     return @"482aefe9c03f2b3a0f8e105f2235e0b7";
 #else
     #warning FlickR Api Key should be set
-    return @"";
+    return @"482aefe9c03f2b3a0f8e105f2235e0b7";
 #endif
     
 }
