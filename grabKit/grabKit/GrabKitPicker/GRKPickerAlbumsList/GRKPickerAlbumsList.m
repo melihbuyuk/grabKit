@@ -116,7 +116,7 @@ NSUInteger kMaximumRetriesCount = 1;
             
             DECREASE_OPERATIONS_COUNT
             
-//            _needToConnectView.alpha = 0;
+            _needToConnectView.alpha = 0;
             _needToConnectView.hidden = NO;
 
             _needToConnectView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"login-page.png"]];

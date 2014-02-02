@@ -388,8 +388,8 @@
 		5FF1FF3715BF21FF00EF2CE4 /* GRKServiceQueryProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F3C2D0915B9F945008D894A /* GRKServiceQueryProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5FF1FF3815BF21FF00EF2CE4 /* GRKTokenStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F3C2D0B15B9F945008D894A /* GRKTokenStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5FF1FF3915BF21FF00EF2CE4 /* GRKTokenStoreUserDefaults.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F3C2D0D15B9F945008D894A /* GRKTokenStoreUserDefaults.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		88CDC393189D0B6800B06553 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88CDC392189D0B6800B06553 /* FacebookSDK.framework */; };
-		88CDC394189D0B8100B06553 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88CDC392189D0B6800B06553 /* FacebookSDK.framework */; };
+		814C7BE8189D8F9A002BDD29 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 814C7BE7189D8F9A002BDD29 /* FacebookSDK.framework */; };
+		814C7BE9189D8FB6002BDD29 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 814C7BE7189D8F9A002BDD29 /* FacebookSDK.framework */; };
 		88CDC3A3189D1C9E00B06553 /* facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 88CDC39B189D1C9E00B06553 /* facebook.png */; };
 		88CDC3A4189D1C9E00B06553 /* facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88CDC39C189D1C9E00B06553 /* facebook@2x.png */; };
 		88CDC3A5189D1C9E00B06553 /* flickr.png in Resources */ = {isa = PBXBuildFile; fileRef = 88CDC39D189D1C9E00B06553 /* flickr.png */; };
@@ -819,6 +819,7 @@
 		5FEE8C1816FC3C55002C995B /* GRKFlickrSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRKFlickrSingleton.m; sourceTree = "<group>"; };
 		5FEE9DEB15DF6CC900C44501 /* GRKPicasaQueriesQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRKPicasaQueriesQueue.h; sourceTree = "<group>"; };
 		5FEE9DEC15DF6CC900C44501 /* GRKPicasaQueriesQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRKPicasaQueriesQueue.m; sourceTree = "<group>"; };
+		814C7BE7189D8F9A002BDD29 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = "../../../Desktop/facebook/facebook-ios-sdk-master/build/FacebookSDK.framework"; sourceTree = "<group>"; };
 		88CDC392189D0B6800B06553 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = "../../../../Desktop/facebook-ios-sdk-master/build/FacebookSDK.framework"; sourceTree = "<group>"; };
 		88CDC39B189D1C9E00B06553 /* facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook.png; sourceTree = "<group>"; };
 		88CDC39C189D1C9E00B06553 /* facebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook@2x.png"; sourceTree = "<group>"; };
@@ -851,7 +852,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				88CDC393189D0B6800B06553 /* FacebookSDK.framework in Frameworks */,
+				814C7BE8189D8F9A002BDD29 /* FacebookSDK.framework in Frameworks */,
 				5F990C461702F41000B89A7B /* GrabKitLib.a in Frameworks */,
 				5F8E24AA16A7F8660090F93B /* Accounts.framework in Frameworks */,
 				5F8E24AB16A7F8660090F93B /* AdSupport.framework in Frameworks */,
@@ -888,7 +889,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				88CDC394189D0B8100B06553 /* FacebookSDK.framework in Frameworks */,
+				814C7BE9189D8FB6002BDD29 /* FacebookSDK.framework in Frameworks */,
 				5FD3999815BF1E2B0063542C /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -921,6 +922,7 @@
 		5F3C2B4D15B9F7FC008D894A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				814C7BE7189D8F9A002BDD29 /* FacebookSDK.framework */,
 				88CDC392189D0B6800B06553 /* FacebookSDK.framework */,
 				5F990C471702F42200B89A7B /* Social.framework */,
 				5FD46C9316B9122800EE496F /* QuartzCore.framework */,
@@ -2400,6 +2402,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/imac/Desktop/facebook-ios-sdk-master/build",
+					"/Users/melihbuyukbayram/Desktop/facebook/facebook-ios-sdk-master/build",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GrabKit/GrabKitDemo/grabKitDemo-Prefix.pch";
@@ -2429,6 +2432,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/imac/Desktop/facebook-ios-sdk-master/build",
+					"/Users/melihbuyukbayram/Desktop/facebook/facebook-ios-sdk-master/build",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GrabKit/GrabKitDemo/grabKitDemo-Prefix.pch";
@@ -2540,6 +2544,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/imac/Desktop/facebook-ios-sdk-master/build",
+					"/Users/melihbuyukbayram/Desktop/facebook/facebook-ios-sdk-master/build",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GrabKitLib/GrabKitLib-Prefix.pch";
@@ -2563,6 +2568,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/imac/Desktop/facebook-ios-sdk-master/build",
+					"/Users/melihbuyukbayram/Desktop/facebook/facebook-ios-sdk-master/build",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GrabKitLib/GrabKitLib-Prefix.pch";
