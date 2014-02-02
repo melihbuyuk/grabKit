@@ -71,7 +71,7 @@
     
     
     // This label has always its origin at (87,28). have a look to the xib.
-    labelAlbumName.frame = CGRectMake(87, 28, labelAlbumNameSize.width, labelAlbumNameSize.height);
+    labelAlbumName.frame = CGRectMake(97, 28, labelAlbumNameSize.width, labelAlbumNameSize.height);
     
     
     // Now, let's compute and set the frame of the label for the photos count 

@@ -51,6 +51,10 @@ NSUInteger kCellHeight = 75;
     [_album removeObserver:self forKeyPath:@"count"];
 }
 
+-(void)back {
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 -(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andGrabber:(GRKServiceGrabber*)grabber  andAlbum:(GRKAlbum*)album{
     
@@ -64,8 +68,33 @@ NSUInteger kCellHeight = 75;
         _indexesOfLoadedPages = [NSMutableArray array];
         _indexesOfPagesToLoad = [NSMutableArray array];
         
-        _doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(didTouchDoneButton)];
-        _cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(didTouchDoneButton)];
+        UIImage *buttonImage = [UIImage imageNamed:@"social-back.png"];
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        [button setImage:buttonImage forState:UIControlStateNormal];
+        button.frame = CGRectMake(0, 0, buttonImage.size.width, buttonImage.size.height);
+        [button addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem *customBarItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+        
+        UIImage *buttonCancel = [UIImage imageNamed:@"social-cancel.png"];
+        UIButton *buttonclose = [UIButton buttonWithType:UIButtonTypeCustom];
+        [buttonclose setImage:buttonCancel forState:UIControlStateNormal];
+        buttonclose.frame = CGRectMake(0, 0, buttonCancel.size.width, buttonCancel.size.height);
+        [buttonclose addTarget:self action:@selector(didTouchDoneButton) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem *cancelBarItem = [[UIBarButtonItem alloc] initWithCustomView:buttonclose];
+
+        UIImage *buttonDoneImage = [UIImage imageNamed:@"social-done.png"];
+        UIButton *buttonDone = [UIButton buttonWithType:UIButtonTypeCustom];
+        [buttonDone setImage:buttonDoneImage forState:UIControlStateNormal];
+        buttonDone.frame = CGRectMake(0, 0, buttonDoneImage.size.width, buttonDoneImage.size.height);
+        [buttonDone addTarget:self action:@selector(didTouchDoneButton) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem *doneBarItem = [[UIBarButtonItem alloc] initWithCustomView:buttonDone];
+
+        
+        self.navigationItem.leftBarButtonItem = customBarItem;
+                
+        
+        _doneButton = doneBarItem;
+        _cancelButton = cancelBarItem;
         
 
         // Sometimes, the grabbers return an erroneous number of photos for a given album.

@@ -64,169 +64,105 @@ NSUInteger kMaximumRetriesCount = 1;
     for( GRKAlbum * album in _albums ){
         [album removeObserver:self forKeyPath:@"count"];
     }
-
 }
 
 
--(id) initWithGrabber:(id)grabber andServiceName:(NSString *)serviceName{
-    
-    
+-(id) initWithGrabber:(id)grabber andServiceName:(NSString *)serviceName
+{
     self = [super initWithNibName:@"GRKPickerAlbumsList" bundle:GRK_BUNDLE];
     if ( self ){
-        
-   
         _grabber = grabber;
         _serviceName = serviceName;
         _albums = [[NSMutableArray alloc] init];
         _lastLoadedPageIndex = 0;
         allAlbumsGrabbed = NO;
         [self setState:GRKPickerAlbumsListStateInitial];
+        
     }
-    
-    
     return self;
 }
 
-/*
- 
- This state design-pattern must be used to update UI only.
- 
- */
--(void) setState:(GRKPickerAlbumsListState)newState {
+-(NSInteger)numberOfRowsInTotal{
+    NSInteger sections = [_albums count];
+    NSInteger cellCount = 0;
+    for (NSInteger i = 0; i < sections; i++) {
+        GRKAlbum * albumAtTotal = (GRKAlbum*)[_albums objectAtIndex:i];
+        cellCount += albumAtTotal.count;
+    }
     
-    
+    return cellCount;
+}
+
+/* This state design-pattern must be used to update UI only. */
+
+-(void) setState:(GRKPickerAlbumsListState)newState
+{
     state = newState;
-    
-    switch (newState) {
-            
-        case GRKPickerAlbumsListStateConnecting:
-        {
-            
+    switch (newState)
+    {
+        case GRKPickerAlbumsListStateConnecting: {
             _needToConnectView.hidden = YES;
-            
             [self showHUD];
-         
             INCREASE_OPERATIONS_COUNT
         }
-            break;
-           
-            
-        case GRKPickerAlbumsListStateNeedToConnect:
-        {
-            
+        break;
+        
+        case GRKPickerAlbumsListStateNeedToConnect:{
             DECREASE_OPERATIONS_COUNT
-            
             _needToConnectView.alpha = 0;
             _needToConnectView.hidden = NO;
-
-            _needToConnectView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"login-page.png"]];
-                        
-            UIColor *textColor;
-            
-            if ([_grabber.serviceName isEqualToString:@"FlickR"]) {
-                textColor = [UIColor colorWithRed:255.0f/255.0f green:0.0f/255.0f blue:132.0f/255.0f alpha:1.0f];
-            }
-            else if ([_grabber.serviceName isEqualToString:@"Facebook"])
-            {
-                textColor = [UIColor colorWithRed:59.0f/255.0f green:89.0f/255.0f blue:152.0f/255.0f alpha:1.0f];
-            }
-            else if ([_grabber.serviceName isEqualToString:@"Instagram"])
-            {
-                textColor = [UIColor colorWithRed:63.0f/255.0f green:114.0f/255.0f blue:155.0f/255.0f alpha:1.0f];
-            }
-            else if ([_grabber.serviceName isEqualToString:@"Picasa"])
-            {
-                textColor = [UIColor colorWithRed:221.0f/255.0f green:75.0f/255.0f blue:57.0f/255.0f alpha:1.0f];
-            }
-            
-            
-//            NSString * needToConnectString = GRK_i18n(@"GRK_ALBUMS_LIST_NEED_TO_CONNECT", @"%serviceName%");
-            _needToConnectLabel.text = _grabber.serviceName;
-            _needToConnectLabel.textColor = textColor;
-            _needToConnectLabel.font = [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:19];
-//            [_connectButton setTitle:GRK_i18n(@"GRK_ALBUMS_LIST_CONNECT_BUTTON",@"Login") forState:UIControlStateNormal];
-            
-            [_connectButton setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@-button.png",[_grabber.serviceName lowercaseString]]] forState:UIControlStateNormal];
+            _needToConnectLabel.hidden = YES;
+            _needToConnectView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@-view.png",[_grabber.serviceName lowercaseString]]]];
+            [_connectButton setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@-login.png",[_grabber.serviceName lowercaseString]]] forState:UIControlStateNormal];
             
             [UIView animateWithDuration:0.33 animations:^{
-
                 _needToConnectView.alpha = 1;
                 [self hideHUD];
-                
             }];
-            
-            
         }
-            break;
+        break;
             
-        case GRKPickerAlbumsListStateConnected:
-        {
+        case GRKPickerAlbumsListStateConnected: {
             DECREASE_OPERATIONS_COUNT
-            
             if ( ! [_grabber isKindOfClass:[GRKDeviceGrabber class]]) {
-                [self buildHeaderView];
+//                [self buildHeaderView];
             }
         }
-            break;
+        break;
             
-            
-        case GRKPickerAlbumsListStateDidNotConnect:
-        {
+        case GRKPickerAlbumsListStateDidNotConnect: {
             DECREASE_OPERATIONS_COUNT
-            
             [self.navigationController popViewControllerAnimated:YES];
-            
         }
-            break;
-
-        case GRKPickerAlbumsListStateConnectionFailed:
-        {
+        break;
             
+        case GRKPickerAlbumsListStateConnectionFailed: {
             DECREASE_OPERATIONS_COUNT
-            
             _needToConnectView.alpha = 0;
             _needToConnectView.hidden = NO;
-            
             _needToConnectLabel.text = GRK_i18n(@"GRK_ALBUMS_LIST_ERROR_RETRY", @"An error occured. Please try again.");
             
             [UIView animateWithDuration:0.33 animations:^{
-                
                 _needToConnectView.alpha = 1;
                 [self hideHUD];
-                
             }];
-            
-            
         }
-            break;
-            
-            
-            
-            
-        case GRKPickerAlbumsListStateGrabbing:
-        {
+        break;
+        
+        case GRKPickerAlbumsListStateGrabbing: {
             INCREASE_OPERATIONS_COUNT
-            
             if ( [MBProgressHUD HUDForView:self.view] == nil ){
                 [self showHUD];
-                
             }
-            
         }
-            
-            break;
+        break;
 
-            
-        // When some albums are grabbed, reload the tableView    
+        // When some albums are grabbed, reload the tableView
         case GRKPickerAlbumsListStateAlbumsGrabbed:
         case GRKPickerAlbumsListStateAllAlbumsGrabbed:    
         {
             DECREASE_OPERATIONS_COUNT
-            
-            // If that's the first grab, then the tableView has not been added to the view yet.
             if ( self.tableView.hidden  ){
-                
-                //First Let's make the table view invisible
                 self.tableView.alpha = 0;
                 self.tableView.hidden = NO;
                 
@@ -250,7 +186,8 @@ NSUInteger kMaximumRetriesCount = 1;
             }
             
             [self.tableView reloadData];
-            
+            NSLog(@"%d", [self numberOfRowsInTotal]);
+            NSLog(@"%d", [_albums count]);
             
         }
             break;
@@ -310,82 +247,15 @@ NSUInteger kMaximumRetriesCount = 1;
     
 }
 
--(void)showHUD {
-    
+-(void)showHUD
+{
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeIndeterminate;
-
-    hud.labelText = GRK_i18n(@"GRK_ALBUMS_LIST_HUD_LOADING", @"Loading ...");
-    
+    hud.labelText = @"Yukleniyor";
 }
 
 -(void)hideHUD {
     [MBProgressHUD  hideHUDForView:self.view animated:YES];
-    
-}
-
--(void) buildHeaderView {
-    
-    _headerView = [[GRK_BUNDLE loadNibNamed:@"GRKPickerCurrentUserView" owner:nil options:nil] objectAtIndex:0];
-    _headerView.delegate = self;
-    _headerView.frame = CGRectMake(0, 0, self.tableView.frame.size.width, 50);
-    self.tableView.tableHeaderView = _headerView;
-    
-
-        
-    INCREASE_OPERATIONS_COUNT // increase, for the call on the grabber
-    
-    // Call this category method to load specific data about the logged user : username and profile picture
-    [_grabber loadUsernameAndProfilePictureOfCurrentUserWithCompleteBlock:^(id result) {
-        
-        DECREASE_OPERATIONS_COUNT // decrease, for the call on the grabber
-        
-        // The result is a NSDictionary containing 2 objects ...
-        NSString * username = [result objectForKey:kGRKUsernameKey];
-        NSString * profilePictureURLstring = [result objectForKey:kGRKProfilePictureKey];
-        
-        
-        // download the profile picture asynchronously
-        __block AsyncURLConnection * urlConnection =
-        [AsyncURLConnection connectionWithString:profilePictureURLstring
-                                   responseBlock:nil
-                                   progressBlock:nil
-                                   completeBlock:^(NSData *data) {
-                                       
-                                       DECREASE_OPERATIONS_COUNT // decrease, for the AsyncURLConnection call
-                                       
-                                       // build an image with the data
-                                       UIImage * profilePicture = [UIImage imageWithData:data];
-                                       dispatch_async(dispatch_get_main_queue(), ^{
-                                           // update the imageview on the main thread
-                                           [_headerView showWithUsername:username andProfilePictureImage:profilePicture];
-                                       });
-                                       
-                                       urlConnection = nil;
-                                       
-                                   } errorBlock:^(NSError *error) {
-                                       
-                                       DECREASE_OPERATIONS_COUNT // decrease, for the AsyncURLConnection call
-                                       
-                                       // Here, we can update the imageview with a default image for failed downloads
-                                       
-                                       urlConnection = nil;
-                                       
-                                   }];
-        
-        INCREASE_OPERATIONS_COUNT // increase, for the AsyncURLConnection call
-        [urlConnection start];
-        
-        
-    } andErrorBlock:^(NSError *error) {
-        
-        DECREASE_OPERATIONS_COUNT
-        NSLog(@" error in load data for service header : %@ ", error);
-        
-    }];
-    
-    
-    
 }
 
 -(void) buildOrUpdateFooterView {
@@ -525,9 +395,15 @@ NSUInteger kMaximumRetriesCount = 1;
 {
     [super viewDidLoad];
  
-    self.tableView.rowHeight = 80.0;
- 
+    self.tableView.rowHeight = 90.0;
+//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+    }
 }
+
+
 
 - (void)viewDidUnload
 {
@@ -558,7 +434,10 @@ NSUInteger kMaximumRetriesCount = 1;
     
 }
 
-
+-(void)back {
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -570,7 +449,23 @@ NSUInteger kMaximumRetriesCount = 1;
         return;
     
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(didTouchCancelButton)];
+    UIImage *buttonImage = [UIImage imageNamed:@"social-back.png"];
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setImage:buttonImage forState:UIControlStateNormal];
+    button.frame = CGRectMake(0, 0, buttonImage.size.width, buttonImage.size.height);
+    [button addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *customBarItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+    
+    UIImage *buttonCancel = [UIImage imageNamed:@"social-cancel.png"];
+    UIButton *buttonclose = [UIButton buttonWithType:UIButtonTypeCustom];
+    [buttonclose setImage:buttonCancel forState:UIControlStateNormal];
+    buttonclose.frame = CGRectMake(0, 0, buttonCancel.size.width, buttonCancel.size.height);
+    [buttonclose addTarget:self action:@selector(didTouchCancelButton) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *cancelBarItem = [[UIBarButtonItem alloc] initWithCustomView:buttonclose];
+    
+    self.navigationItem.leftBarButtonItem = customBarItem;
+    
+    self.navigationItem.rightBarButtonItem = cancelBarItem;
     
     
     [self setState:GRKPickerAlbumsListStateConnecting];
@@ -652,25 +547,9 @@ NSUInteger kMaximumRetriesCount = 1;
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    
-    /* If the navigation bar is not translucent, then we don't need to animate anything during rotation
-    If you don't understand why :
-    _ comment the test below
-    _ go to GRKPickerViewController.m 
-    _ set the navigationBar.translucent to NO,
-    _ Build and run the Demo app, select a service, and wait for the albums list to load
-    _ Now, rotate from portrait to landscape, and scroll ...
-    */
     if ( [[GRKPickerViewController sharedInstance] isPresentedInPopover] || ! self.navigationController.navigationBar.translucent ){
         return;
     }
-    
-    /* In order to have a beautiful rotation effect, we want :
-        _ That the space reserved for the header view fits the header view ( i.e. update the tableView's contentInset to the navigationBar's height )
-        _ If the tableView is scrolled at the top BEFORE the rotation begins, we want it to still be scrolled at the top AFTER the rotation.
-
-    */
-    
     CGFloat top; // The top value of the content inset
     BOOL shouldScrollToTop = NO;
     
@@ -685,119 +564,64 @@ NSUInteger kMaximumRetriesCount = 1;
     } else {
         top = navigationBarHeightPortrait;
         shouldScrollToTop = ( self.tableView.contentOffset.y ==  - navigationBarHeightLandscape );
-        
     }
     
     [UIView animateWithDuration:duration animations:^{
-        
         self.tableView.contentInset = UIEdgeInsetsMake(top, 0, 0, 0);
         if ( shouldScrollToTop ){
             self.tableView.contentOffset = CGPointMake(0, - top);
         }
-        
     }];
-    
-    
 }
 
--(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-   
-    // retrieve the loadMoreCell to update it
+-(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
     NSIndexPath * loadMoreCellIndexPath = [NSIndexPath indexPathForRow:[_albums count] inSection:0];
     UITableViewCell * loadMoreCell = [_tableView cellForRowAtIndexPath:loadMoreCellIndexPath];
     
-    
     if ( [loadMoreCell isKindOfClass:[GRKPickerLoadMoreCell class]] ){
         [(GRKPickerLoadMoreCell*)loadMoreCell updateButtonFrame];
-        
     }
-    
 }
 
-
-
-
-
--(void) prepareCell:(GRKPickerAlbumsListCell *)cell fromTableView:(UITableView*)tableView atIndexPath:(NSIndexPath*)indexPath withAlbum:(GRKAlbum*)album  {
-    
-    // This just sets the album name and the photos count.
+-(void) prepareCell:(GRKPickerAlbumsListCell *)cell fromTableView:(UITableView*)tableView atIndexPath:(NSIndexPath*)indexPath withAlbum:(GRKAlbum*)album
+{
     [cell setAlbum:album];
-    
-    
+
     if ( album.coverPhoto == nil && [album.coverPhoto.images count] == 0 )
         return;
-    
-    
+
     NSURL * thumbnailURL = nil;
-    
-    // Pick a GRKImage of the cover photo that fits the thumbnail.
-    // The imageView for thumbnails is 75px wide, so we need images with both dimensions greater or equal to 2*75px, for a perfect result on retina displays
     NSUInteger minWidth = cell.thumbnail.frame.size.width * 2;
     NSUInteger minHeight = cell.thumbnail.frame.size.height * 2;
     
     NSArray * imagesSortedByHeight = [album.coverPhoto imagesSortedByHeight];
     for( GRKImage * image in imagesSortedByHeight ){
-        
         if ( image.width >= minWidth && image.height >= minHeight ) {
-            
             thumbnailURL = image.URL;
-            // Once we have found the first thumbnail bigger than the thumbnail, break the loop
             break;
         }
     }
-    
-    // At this point, if the thumbnail is nil, it means the photo doesn't have an image bigger than 150x150 px
-    // Then, take the biggest image of the photo instead.
     if ( thumbnailURL == nil ){
         thumbnailURL = ((GRKImage*)[imagesSortedByHeight lastObject]).URL;
     }
-     
-        
-    // Try to retreive the thumbnail from the cache first ...
     UIImage * cachedThumbnail = [[GRKPickerThumbnailManager sharedInstance] cachedThumbnailForURL:thumbnailURL andSize:CGSizeMake(minWidth, minHeight)];
     
     if ( cachedThumbnail == nil ) {
+        [[GRKPickerThumbnailManager sharedInstance] downloadThumbnailAtURL:thumbnailURL forThumbnailSize:CGSizeMake(minWidth, minHeight) withCompleteBlock:^( UIImage *image, BOOL retrievedFromCache )
+        {
+            if ( image != nil ){
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    GRKPickerAlbumsListCell * cellToUpdate = (GRKPickerAlbumsListCell *)[tableView cellForRowAtIndexPath:indexPath];
+                    [cellToUpdate updateThumbnailWithImage:image animated: ! retrievedFromCache ];
+                });
+            }
+        } andErrorBlock:^(NSError *error) {
         
-        // If it hasn't been downloaded yet, let's do it
-        [[GRKPickerThumbnailManager sharedInstance] downloadThumbnailAtURL:thumbnailURL
-                                                          forThumbnailSize:CGSizeMake(minWidth, minHeight)
-                                                         withCompleteBlock:^( UIImage *image, BOOL retrievedFromCache ) {
-                                                             
-                                                             if ( image != nil ){
-                                                                 
-                                                                 dispatch_async(dispatch_get_main_queue(), ^{
-                                                                     
-                                                                     /* do not do that :
-                                                                      [cell updateThumbnailWithImage:image animated:NO];
-                                                                      
-                                                                      This block is performed asynchronously.
-                                                                      During the download of the image, the given cell may have been dequeued and reused, so we would be updating the wrong cell.
-                                                                      Do this instead :
-                                                                      */
-                                                                     
-                                                                     GRKPickerAlbumsListCell * cellToUpdate = (GRKPickerAlbumsListCell *)[tableView cellForRowAtIndexPath:indexPath];
-                                                                     [cellToUpdate updateThumbnailWithImage:image animated: ! retrievedFromCache ];
-                                                                     
-                                                                 });
-                                                                 
-                                                             }
-                                                             
-                                                             
-                                                         } andErrorBlock:^(NSError *error) {
-                                                             
-                                                             // Nothing to do, fail silently
-                                                         }];
-        
-        
+        }];
     }else {
-        
-        // else, just update it
         [cell updateThumbnailWithImage:cachedThumbnail animated:NO];
     }
-    
-    
-    
-    
 }
 
 
@@ -830,6 +654,7 @@ NSUInteger kMaximumRetriesCount = 1;
 
 
 
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -859,7 +684,7 @@ NSUInteger kMaximumRetriesCount = 1;
         }
         
         GRKAlbum * albumAtIndexPath = (GRKAlbum*)[_albums objectAtIndex:indexPath.row];
-
+        
         [self prepareCell:(GRKPickerAlbumsListCell*)cell fromTableView:tableView atIndexPath:indexPath withAlbum:albumAtIndexPath];
         
         if ( albumAtIndexPath.count > 0 ){
@@ -879,6 +704,8 @@ NSUInteger kMaximumRetriesCount = 1;
     
     return cell;
 }
+
+
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     

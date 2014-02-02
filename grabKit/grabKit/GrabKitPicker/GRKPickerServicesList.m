@@ -125,7 +125,14 @@
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(didTouchCancelButton)];
+    UIImage *buttonCancel = [UIImage imageNamed:@"social-cancel.png"];
+    UIButton *buttonclose = [UIButton buttonWithType:UIButtonTypeCustom];
+    [buttonclose setImage:buttonCancel forState:UIControlStateNormal];
+    buttonclose.frame = CGRectMake(0, 0, buttonCancel.size.width, buttonCancel.size.height);
+    [buttonclose addTarget:self action:@selector(didTouchCancelButton) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *cancelBarItem = [[UIBarButtonItem alloc] initWithCustomView:buttonclose];
+    
+    self.navigationItem.rightBarButtonItem = cancelBarItem;
  
 }
 

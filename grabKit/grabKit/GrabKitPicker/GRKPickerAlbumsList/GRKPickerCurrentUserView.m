@@ -99,21 +99,21 @@
     
     
     
-    if ( gradient == nil ){
-
-        // build and add a gradient at the bottom the of the view
-        CGFloat layerHeight = 3;
-    
-        gradient = [CAGradientLayer layer];
-        ((CAGradientLayer*)gradient).frame = CGRectMake(0,
-                                                        self.bounds.size.height - layerHeight,
-                                                        self.frame.size.width,
-                                                        layerHeight);
-
-        ((CAGradientLayer*)gradient).colors = [NSArray arrayWithObjects:(id)[[UIColor whiteColor] CGColor], (id)[[UIColor grayColor] CGColor], nil];
-        [self.layer insertSublayer:gradient atIndex:0];
-        
-    }
+//    if ( gradient == nil ){
+//
+//        // build and add a gradient at the bottom the of the view
+//        CGFloat layerHeight = 3;
+//    
+//        gradient = [CAGradientLayer layer];
+//        ((CAGradientLayer*)gradient).frame = CGRectMake(0,
+//                                                        self.bounds.size.height - layerHeight,
+//                                                        self.frame.size.width,
+//                                                        layerHeight);
+//
+//        ((CAGradientLayer*)gradient).colors = [NSArray arrayWithObjects:(id)[[UIColor whiteColor] CGColor], (id)[[UIColor grayColor] CGColor], nil];
+//        [self.layer insertSublayer:gradient atIndex:0];
+//        
+//    }
     
     [UIView animateWithDuration:0.33 animations:^{
         _imageViewProfilePicture.alpha = 1.0;
@@ -126,7 +126,7 @@
 -(void) layoutSubviews {
     [super layoutSubviews];
     
-    CGFloat layerHeight = 3;
+    CGFloat layerHeight = 1;
     
     ((CAGradientLayer*)gradient).frame = CGRectMake(0,
                                                     self.bounds.size.height - layerHeight,

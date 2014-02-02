@@ -75,6 +75,7 @@ typedef NSUInteger GRKPickerAlbumsListState;
     IBOutlet UIView * _needToConnectView;
     IBOutlet UILabel * _needToConnectLabel;
     IBOutlet UIButton * _connectButton;
+        
     
     GRKServiceGrabber * _grabber; // grabber used to show the list of albums
     
@@ -87,6 +88,8 @@ typedef NSUInteger GRKPickerAlbumsListState;
     
     GRKPickerAlbumsListState state; // state of the controller
 }
+
+
 
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, readonly) NSString * serviceName;
