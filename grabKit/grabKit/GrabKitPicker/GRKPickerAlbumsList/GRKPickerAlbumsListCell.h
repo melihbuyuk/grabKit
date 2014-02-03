@@ -24,6 +24,7 @@
 
 #import <UIKit/UIKit.h>
 #import "GRKPickerPhotosListThumbnail.h"
+#import "GRKAlbumPhotosListThumbnail.h"
 #import "GRKAlbum.h"
 
 /* This class is not meant to be used as-is by third-party developers. The comments are here just for eventual needs of customisation .
@@ -37,12 +38,20 @@
     GRKAlbum * _album;
     
 }
+@property (strong, nonatomic) IBOutlet UILabel *photoCountSubText;
+
+@property (strong, nonatomic) IBOutlet UILabel *albumSubText;
+
+@property (strong, nonatomic) IBOutlet UIImageView *tableBgImage;
 
 @property (nonatomic, strong) IBOutlet GRKPickerPhotosListThumbnail * thumbnail;
+@property (strong, nonatomic) IBOutlet GRKAlbumPhotosListThumbnail *thumbnails;
+
 @property (nonatomic, strong) IBOutlet UILabel * labelAlbumName;
 @property (nonatomic, strong) IBOutlet UILabel * labelPhotosCount;
 
 -(void)updateThumbnailWithImage:(UIImage*)image animated:(BOOL)animated;
+-(void)updateAlbumThumbnailWithImage:(UIImage*)image animated:(BOOL)animated;
 -(void)setAlbum:(GRKAlbum*)_newAlbum ;
 
 @end

@@ -146,7 +146,7 @@
 // Hint : You can use the default localization here.
 - (NSString*)facebookTaggedPhotosAlbumName {
 
-    return GRK_i18n(@"GRK_FACEBOOK_TAGGED_PHOTOS", @"Tagged photos");
+    return @"Etiketlenmeyenler";
     
 }
 

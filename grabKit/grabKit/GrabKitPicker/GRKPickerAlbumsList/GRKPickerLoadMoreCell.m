@@ -27,12 +27,13 @@
 @implementation GRKPickerLoadMoreCell
 
 @synthesize delegate;
+@synthesize loadViews;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        // Initialization code
+
     }
     return self;
 }
@@ -82,7 +83,7 @@
     
     [_loadMoreButton.titleLabel setAdjustsFontSizeToFitWidth:YES];
     
-    [_loadMoreButton setTitle:GRK_i18n(@"GRK_LOAD_MORE_CELL_ERROR_RETRY", @"An error occured. Please retry.") forState:UIControlStateNormal];
+    [_loadMoreButton setTitle:@"Bir Hata Olustu, Lutfen Daha Sonra Tekrar Deneyiniz." forState:UIControlStateNormal];
     [_loadMoreButton sizeToFit];
     
     [self updateButtonFrame];
@@ -94,10 +95,10 @@
     
     [_loadMoreButton.titleLabel setAdjustsFontSizeToFitWidth:YES];
     
-    [_loadMoreButton setTitle:GRK_i18n(@"GRK_LOAD_MORE_CELL_LOAD_MORE", @"Load more") forState:UIControlStateNormal];
+    [_loadMoreButton setTitle:@"Daha Fazla..." forState:UIControlStateNormal];
 
     [_loadMoreButton sizeToFit];
-    
+    loadViews.backgroundColor = [UIColor colorWithRed:247.0f/255.0f green:244.0f/255.0f blue:240.0f/255.0f alpha:1.0f];
     [self updateButtonFrame];
     
 }

@@ -23,7 +23,7 @@
 
 
 #import <UIKit/UIKit.h>
-
+#import "NZCircularImageView.h"
 
 
 /* This class is not meant to be used as-is by third-party developers. The comments are here just for eventual needs of customisation .
@@ -38,9 +38,13 @@
 @interface GRKPickerPhotosListThumbnail : UICollectionViewCell {
     
     UIImageView * thumbnailImageView;
+    NZCircularImageView * albumThumbnailImageView;
     
     UIImageView * selectedImageView;
+    
+    BOOL backgroundHidden;
 }
+
 
 
 -(void)updateThumbnailWithImage:(UIImage*)image animated:(BOOL)animated;

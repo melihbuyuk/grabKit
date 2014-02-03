@@ -23,13 +23,16 @@
 
 
 #import "GRKPickerAlbumsListCell.h"
-
+#import "NSDate+HumanizedTime.h"
 
 @implementation GRKPickerAlbumsListCell
 
 @synthesize thumbnail;
+@synthesize thumbnails;
 @synthesize labelAlbumName;
 @synthesize labelPhotosCount;
+@synthesize albumSubText;
+@synthesize photoCountSubText;
 
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -37,7 +40,6 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        
         
     }
     return self;
@@ -51,12 +53,18 @@
     
 }
 
+-(void)updateAlbumThumbnailWithImage:(UIImage *)image animated:(BOOL)animated {
+    
+    [self.thumbnails updateAlbumThumbnailWithImage:image animated:animated];
+    
+}
+
 
 -(void)setAlbum:(GRKAlbum*)_newAlbum {
     
     _album = _newAlbum;
     
-    labelAlbumName.text = _album.name;
+    labelAlbumName.text = [_album.name uppercaseString];
     
 
     // In this cell, we want the label for the photos count to be placed right after the name of the album
@@ -66,29 +74,49 @@
     
     // 170px is the maximum width for this label.
     CGSize labelAlbumNameSize = [_album.name sizeWithFont:labelAlbumName.font
-                                        constrainedToSize:CGSizeMake(170, labelAlbumName.frame.size.height)
+                                        constrainedToSize:CGSizeMake(250, labelAlbumName.frame.size.height)
                                             lineBreakMode:NSLineBreakByTruncatingTail];
     
     
     // This label has always its origin at (87,28). have a look to the xib.
-    labelAlbumName.frame = CGRectMake(97, 28, labelAlbumNameSize.width, labelAlbumNameSize.height);
+    labelAlbumName.frame = CGRectMake(84, 29, 167, labelAlbumNameSize.height);
+    labelAlbumName.textColor = [UIColor colorWithRed:100.0f/255.0f green:86.0f/255.0f blue:83.0f/255.0f alpha:1.0f];
+    labelAlbumName.font = [UIFont fontWithName:@"DINCondensed-Bold" size:15];
+    
+    
+    [NSDateFormatter setDefaultFormatterBehavior:NSDateFormatterBehavior10_4];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss ZZZ"];
+    
+    NSDate *dateFromString = [[NSDate alloc] init];
+    dateFromString = [dateFormatter dateFromString:[NSString stringWithFormat:@"%@",[_album.dates objectForKey:@"kGRKAlbumDatePropertyDateCreated"]]];
+    
+    NSString *dateString = [dateFromString stringWithHumanizedTimeDifference:NSDateHumanizedSuffixAgo withFullString:YES];
+    
+    NSString *dateText = [[NSString alloc] init];
+    if (![dateString isEqualToString:@"(null)"])
+        dateText = [NSString stringWithFormat:@"En son %@ Tarihin'de Guncellendi", dateString];
+    else
+        dateText = @"Guncelleme Tarihi Bilinmiyor";
+        
+    albumSubText.text = dateText;
+    albumSubText.textColor = [UIColor colorWithRed:176.0f/255.0f green:176.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
+    albumSubText.font = [UIFont fontWithName:@"DINCondensed-Bold" size:12];
     
     
     // Now, let's compute and set the frame of the label for the photos count 
     
-    NSString * labelPhotosCountText = [NSString stringWithFormat:@"(%d)", _album.count ];
-    
-    // 50px is the maximum width for this label. it is supposed to be enough to contain the string "(999+)" without truncating
-    CGSize labelPhotosCountSize = [labelPhotosCountText sizeWithFont:labelPhotosCount.font
-                                                  constrainedToSize:CGSizeMake(50, labelPhotosCount.frame.size.height)
-                                                      lineBreakMode:NSLineBreakByTruncatingTail];
-    
+    NSString * labelPhotosCountText = [NSString stringWithFormat:@"%d", _album.count ];
     
     // this label is placed 5px on the right of the album's name
-    labelPhotosCount.frame = CGRectMake(  CGRectGetMaxX(labelAlbumName.frame) +5, 28, labelPhotosCountSize.width, labelPhotosCountSize.height);
+    labelPhotosCount.frame = CGRectMake(245, 26, 61, 23);
     labelPhotosCount.text = labelPhotosCountText;
+    labelPhotosCount.textAlignment = NSTextAlignmentCenter;
+    labelPhotosCount.textColor = [UIColor colorWithRed:242.0f/255.0f green:121.0f/255.0f blue:97.0f/255.0f alpha:1.0f];
+    labelPhotosCount.font = [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:22];
  
-    
+    photoCountSubText.textColor = [UIColor colorWithRed:242.0f/255.0f green:121.0f/255.0f blue:97.0f/255.0f alpha:1.0f];
+    photoCountSubText.textAlignment = NSTextAlignmentCenter;
     
 }
 
@@ -97,6 +125,7 @@
 -(void) prepareForReuse {
     
     [thumbnail prepareForReuse];
+    [thumbnails prepareForReuse];
     labelAlbumName.text = @"";
     labelPhotosCount.text = @"";
 

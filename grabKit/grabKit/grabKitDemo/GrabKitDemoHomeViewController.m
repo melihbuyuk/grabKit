@@ -68,7 +68,7 @@
     grabkitPickerViewController.allowsSelection = YES;
 
     // ... and we allow, or not, the multiple selection.
-    grabkitPickerViewController.allowsMultipleSelection = _multipleSelectSwitch.on;
+    grabkitPickerViewController.allowsMultipleSelection = NO;
 
 
     

@@ -7,38 +7,66 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="AlbumCell" rowHeight="90" id="4" customClass="GRKPickerAlbumsListCell">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="AlbumCell" rowHeight="90" id="4" customClass="GRKPickerAlbumsListCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4" id="7oT-mO-mji">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="89"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" id="8" userLabel="Image View - Thumbnail" customClass="GRKPickerPhotosListThumbnail">
-                        <rect key="frame" x="10" y="5" width="80" height="80"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="ila-uJ-4PT">
+                        <rect key="frame" x="15" y="14" width="291" height="62"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </imageView>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Album name" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" id="13">
-                        <rect key="frame" x="108" y="15" width="150" height="25"/>
+                        <rect key="frame" x="83" y="24" width="167" height="25"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="16"/>
                         <color key="textColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="(999+)" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="14">
-                        <rect key="frame" x="98" y="43" width="50" height="21"/>
+                    <view contentMode="scaleToFill" id="8" userLabel="Image View - Thumbnail" customClass="GRKPickerPhotosListThumbnail">
+                        <rect key="frame" x="28" y="24" width="44" height="44"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="16"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
+                    <view contentMode="scaleToFill" id="ARg-af-tzE" userLabel="Image View - Thumbnail" customClass="GRKAlbumPhotosListThumbnail">
+                        <rect key="frame" x="28" y="24" width="44" height="44"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="999" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="14">
+                        <rect key="frame" x="245" y="26" width="61" height="23"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="22"/>
                         <color key="textColor" red="0.5543478261" green="0.5543478261" blue="0.5543478261" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1NI-Hy-XJC">
+                        <rect key="frame" x="83" y="45" width="154" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="14"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FOTOGRAF" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8BZ-rD-cp4">
+                        <rect key="frame" x="245" y="45" width="61" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="11"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
+                <outlet property="albumSubText" destination="1NI-Hy-XJC" id="bgj-YJ-8S6"/>
                 <outlet property="labelAlbumName" destination="13" id="18"/>
                 <outlet property="labelPhotosCount" destination="14" id="20"/>
+                <outlet property="photoCountSubText" destination="8BZ-rD-cp4" id="Dcc-Yw-n94"/>
+                <outlet property="tableBgImage" destination="ila-uJ-4PT" id="5HU-UH-V44"/>
                 <outlet property="thumbnail" destination="8" id="35"/>
+                <outlet property="thumbnails" destination="ARg-af-tzE" id="UfB-ZY-G8a"/>
             </connections>
         </tableViewCell>
     </objects>

@@ -116,6 +116,9 @@
         [self.tableView setSeparatorInset:UIEdgeInsetsZero];
     }
     
+    UIEdgeInsets inset = UIEdgeInsetsMake(self.navigationController.navigationBar.frame.size.height + 50, 0, 0, 0);
+    self.tableView.contentInset = inset;
+    
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:218.0f/255.0f green:86.0f/255.0f blue:42.0f/255.0f alpha:1.0f];
     
     self.tableView.separatorColor = [UIColor colorWithRed:218.0f/255.0f green:218.0f/255.0f blue:218.0f/255.0f alpha:1.0f];
@@ -147,13 +150,11 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
+    [super viewWillAppear:NO];
     
     UIEdgeInsets inset = UIEdgeInsetsMake(20, 0, 0, 0);
     self.tableView.contentInset = inset;
@@ -162,8 +163,9 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
-    
+    [super viewDidAppear:NO];
+    UIEdgeInsets inset = UIEdgeInsetsMake(self.navigationController.navigationBar.frame.size.height + 40, 0, 0, 0);
+    self.tableView.contentInset = inset;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -205,7 +207,7 @@
         return @"Cihaz";
     }
     
-    return nil;
+    return @"";
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section

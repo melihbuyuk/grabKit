@@ -57,6 +57,7 @@
     
 }
 
+@property (strong, nonatomic) IBOutlet UIView *loadViews;
 @property (nonatomic, weak) id<GRKPickerLoadMoreCellDelegate> delegate;
 
 -(IBAction)didTouchLoadMoreButton:(id)sender;

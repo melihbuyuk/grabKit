@@ -48,6 +48,7 @@ static NSString *loadMoreCellIdentifier = @"loadMoreCell";
     -(void)setState:(GRKPickerAlbumsListState)newState;
     -(void)showHUD;
     -(void)hideHUD;
+@property (nonatomic) BOOL loading;
 @end
 
 
@@ -186,9 +187,6 @@ NSUInteger kMaximumRetriesCount = 1;
             }
             
             [self.tableView reloadData];
-            NSLog(@"%d", [self numberOfRowsInTotal]);
-            NSLog(@"%d", [_albums count]);
-            
         }
             break;
         
@@ -198,6 +196,7 @@ NSUInteger kMaximumRetriesCount = 1;
             
             NSIndexPath * loadMoreCellIndexPath = [NSIndexPath indexPathForRow:[_albums count] inSection:0];
             UITableViewCell * loadMoreCell = [_tableView cellForRowAtIndexPath:loadMoreCellIndexPath];
+            
             
             if ( [loadMoreCell isKindOfClass:[GRKPickerLoadMoreCell class]] ){
             
@@ -251,7 +250,7 @@ NSUInteger kMaximumRetriesCount = 1;
 {
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeIndeterminate;
-    hud.labelText = @"Yukleniyor";
+    hud.labelText = @"Yukleniyor...";
 }
 
 -(void)hideHUD {
@@ -266,7 +265,7 @@ NSUInteger kMaximumRetriesCount = 1;
     }
     
     
-    NSString * stringAllLoaded = GRK_i18n(@"GRK_ALBUMS_LIST_ALL_ALBUMS_LOADED", @"All albums loaded");
+    NSString * stringAllLoaded = @"Tum Albumler Yuklendi...";
     
     UIFont * fontAllLoaded = [UIFont fontWithName:@"Helvetica" size:14];
     
@@ -395,12 +394,14 @@ NSUInteger kMaximumRetriesCount = 1;
 {
     [super viewDidLoad];
  
-    self.tableView.rowHeight = 90.0;
-//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.rowHeight = 75.0;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
-        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
-    }
+    
+    
+//    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+//        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+//    }
 }
 
 
@@ -425,6 +426,10 @@ NSUInteger kMaximumRetriesCount = 1;
         
     }
 
+    self.tableView.backgroundColor = [UIColor colorWithRed:247.0f/255.0f green:244.0f/255.0f blue:240.0f/255.0f alpha:1.0f];
+    self.tableView.tableFooterView.backgroundColor = [UIColor colorWithRed:247.0f/255.0f green:244.0f/255.0f blue:240.0f/255.0f alpha:1.0f];
+    self.view.backgroundColor = [UIColor colorWithRed:247.0f/255.0f green:244.0f/255.0f blue:240.0f/255.0f alpha:1.0f];
+    
     if ( ! [@[@"7.0"] containsObject:[[UIDevice currentDevice] systemVersion]] ){
         
         	self.tableView.contentOffset = CGPointZero;
@@ -587,13 +592,15 @@ NSUInteger kMaximumRetriesCount = 1;
 -(void) prepareCell:(GRKPickerAlbumsListCell *)cell fromTableView:(UITableView*)tableView atIndexPath:(NSIndexPath*)indexPath withAlbum:(GRKAlbum*)album
 {
     [cell setAlbum:album];
-
+    
+    cell.tableBgImage.image = [UIImage imageNamed:@"social-bg.png"];
+    
     if ( album.coverPhoto == nil && [album.coverPhoto.images count] == 0 )
         return;
-
+    
     NSURL * thumbnailURL = nil;
-    NSUInteger minWidth = cell.thumbnail.frame.size.width * 2;
-    NSUInteger minHeight = cell.thumbnail.frame.size.height * 2;
+    NSUInteger minWidth = 180; //cell.thumbnail.frame.size.width * 2;
+    NSUInteger minHeight = 180;//cell.thumbnail.frame.size.height * 2;
     
     NSArray * imagesSortedByHeight = [album.coverPhoto imagesSortedByHeight];
     for( GRKImage * image in imagesSortedByHeight ){
@@ -613,14 +620,14 @@ NSUInteger kMaximumRetriesCount = 1;
             if ( image != nil ){
                 dispatch_async(dispatch_get_main_queue(), ^{
                     GRKPickerAlbumsListCell * cellToUpdate = (GRKPickerAlbumsListCell *)[tableView cellForRowAtIndexPath:indexPath];
-                    [cellToUpdate updateThumbnailWithImage:image animated: ! retrievedFromCache ];
+                    [cellToUpdate updateAlbumThumbnailWithImage:image animated: ! retrievedFromCache ];
                 });
             }
         } andErrorBlock:^(NSError *error) {
         
         }];
     }else {
-        [cell updateThumbnailWithImage:cachedThumbnail animated:NO];
+        [cell updateAlbumThumbnailWithImage:cachedThumbnail animated:NO];
     }
 }
 
@@ -688,8 +695,8 @@ NSUInteger kMaximumRetriesCount = 1;
         [self prepareCell:(GRKPickerAlbumsListCell*)cell fromTableView:tableView atIndexPath:indexPath withAlbum:albumAtIndexPath];
         
         if ( albumAtIndexPath.count > 0 ){
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            cell.selectionStyle = UITableViewCellSelectionStyleGray;
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
         } else {
             cell.accessoryType = UITableViewCellAccessoryNone;

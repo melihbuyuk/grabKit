@@ -31,8 +31,8 @@
 // How many photos the grabber can load at a time
 NSUInteger kNumberOfPhotosPerPage = 32;
 
-NSUInteger kCellWidth = 75;
-NSUInteger kCellHeight = 75;
+NSUInteger kCellWidth = 95;
+NSUInteger kCellHeight = 95;
 
 @interface GRKPickerPhotosList()
     -(void) setState:(GRKPickerPhotosListState)newState;
@@ -128,13 +128,13 @@ NSUInteger kCellHeight = 75;
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setItemSize:CGSizeMake(kCellWidth, kCellHeight)];
     [flowLayout setMinimumInteritemSpacing:1.0f];
-    [flowLayout setMinimumLineSpacing:4.0f];
-    [flowLayout setSectionInset:UIEdgeInsetsMake(4, 4, 4, 4)];
+    [flowLayout setMinimumLineSpacing:6.0f];
+    [flowLayout setSectionInset:UIEdgeInsetsMake(12, 12, 12, 12)];
 
-    
     _collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:flowLayout];
     _collectionView.delegate = self;
     _collectionView.dataSource = self;
+    
     
     
     // set multipleSelection according to configuration of [GRKPickerViewController sharedInstance]
@@ -142,7 +142,7 @@ NSUInteger kCellHeight = 75;
     _collectionView.allowsMultipleSelection = [GRKPickerViewController sharedInstance].allowsMultipleSelection;
    
     
-    _collectionView.backgroundColor = [UIColor whiteColor];
+    _collectionView.backgroundColor = [UIColor colorWithRed:238.0f/255.0f green:238.0f/255.0f blue:238.0f/255.0f alpha:1.0f];
     _collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [_collectionView registerClass:[GRKPickerPhotosListThumbnail class] forCellWithReuseIdentifier:@"pickerPhotosCell"];
 
@@ -157,7 +157,8 @@ NSUInteger kCellHeight = 75;
 
     }
     
-
+    _collectionView.contentInset = UIEdgeInsetsZero;
+    
     [self.view addSubview:_collectionView];
     
     
@@ -488,13 +489,17 @@ withNumberOfPhotosPerPage:kNumberOfPhotosPerPage
         }
         
         // Try to retreive the thumbnail from the cache first ...
-        UIImage * cachedThumbnail = [[GRKPickerThumbnailManager sharedInstance] cachedThumbnailForURL:thumbnailURL andSize:CGSizeMake(150, 150)];
+        UIImage * cachedThumbnail = [[GRKPickerThumbnailManager sharedInstance] cachedThumbnailForURL:thumbnailURL andSize:CGSizeMake(180, 180)];
 
+    UIImageView * backgroundImage = [[UIImageView alloc] initWithFrame:self.view.bounds];
+    [backgroundImage setImage:[UIImage imageNamed:@"image_placeholder.png"]];
+    cell.backgroundView = backgroundImage;
+    
         if ( cachedThumbnail == nil ) {
             
             // If it hasn't been downloaded yet, let's do it
             [[GRKPickerThumbnailManager sharedInstance] downloadThumbnailAtURL:thumbnailURL
-                                                             forThumbnailSize:CGSizeMake(150, 150)
+                                                             forThumbnailSize:CGSizeMake(180, 180)
                                                             withCompleteBlock:^( UIImage *image, BOOL retrievedFromCache ) {
                                                                 
                                                                 if ( image != nil ){

@@ -24,6 +24,8 @@
 
 #import "GRKPickerPhotosListThumbnail.h"
 #import "GRKPickerViewController.h"
+#import "NZCircularImageView.h"
+#import "GRKPickerAlbumsList.h"
 
 static UIImage * thumbnailPlaceholderImage;
 
@@ -33,7 +35,7 @@ static UIImage * thumbnailPlaceholderImage;
 +(UIImage*)sharedThumbnailPlaceholderImage {
     
     if ( thumbnailPlaceholderImage == nil ){
-        NSString * path = [GRK_BUNDLE pathForResource:@"thumbnail_placeholder" ofType:@"png"];
+        NSString * path = [GRK_BUNDLE pathForResource:@"image_placeholders" ofType:@"png"];
         thumbnailPlaceholderImage = [UIImage imageWithContentsOfFile:path];
     }
     
@@ -67,14 +69,14 @@ static UIImage * thumbnailPlaceholderImage;
 
 -(void) buildViews {
     
-    UIImageView * backgroundImage = [[UIImageView alloc] initWithFrame:self.bounds];
-    [backgroundImage setImage:[GRKPickerPhotosListThumbnail sharedThumbnailPlaceholderImage]];
-    self.backgroundView = backgroundImage;
+//    UIImageView * backgroundImage = [[UIImageView alloc] initWithFrame:self.bounds];
+//    [backgroundImage setImage:[UIImage imageNamed:@"image_placeholder.png"]];
+//    self.backgroundView = backgroundImage;
     
     // The imageView's frame is 1px smaller in every directions, in order to show the 1px-wide black border of the background image.
-    CGRect thumbnailRect = CGRectMake(1, 1, self.bounds.size.width -2 , self.bounds.size.height -2 );
+    CGRect thumbnailRect = CGRectMake(3, 3, self.bounds.size.width -6 , self.bounds.size.height -6 );
     thumbnailImageView = [[UIImageView alloc] initWithFrame:thumbnailRect];
-//    [self addSubview:thumbnailImageView];
+    thumbnailImageView.backgroundColor = [UIColor clearColor];
     [self.contentView addSubview:thumbnailImageView];
     
     NSString * path = [GRK_BUNDLE pathForResource:@"thumbnail_selected" ofType:@"png"];
@@ -111,7 +113,7 @@ static UIImage * thumbnailPlaceholderImage;
     if ( thumbnailImageView.image == nil  &&  animated ){
         
             thumbnailImageView.alpha = .0;
-            [thumbnailImageView setImage:image];
+            thumbnailImageView.image = image;
         
             [UIView animateWithDuration:0.33 animations:^{
                 
@@ -129,7 +131,7 @@ static UIImage * thumbnailPlaceholderImage;
             
             // UI updates must be done on the main thread
             dispatch_async(dispatch_get_main_queue(), ^{
-                [thumbnailImageView setImage:image];
+                thumbnailImageView.image = image;
                
                 if ( selectedImageView.superview == nil ){
                     [self.contentView addSubview:selectedImageView];
