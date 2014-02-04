@@ -59,7 +59,6 @@ NSString * const kGRKPhotoDatePropertyDateTaken = @"kGRKPhotoDatePropertyDateTak
 
 +(id) photoWithId:(NSString*)photoId andCaption:(NSString *)caption andName:(NSString *)name andImages:(NSArray *)images andDates:(NSDictionary*)dates;
 {
-    
     GRKPhoto * photo = [[GRKPhoto alloc] initWithId:photoId andCaption:caption andName:name andImages:images andDates:dates];
     
     return photo;

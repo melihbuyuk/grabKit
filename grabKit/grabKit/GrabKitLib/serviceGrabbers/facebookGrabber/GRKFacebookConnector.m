@@ -75,7 +75,7 @@ static NSString * expirationDateKey = @"ExpirationDateKey";
             [[GRKConnectorsDispatcher sharedInstance] registerServiceConnectorAsConnecting:self];
             _applicationDidEnterBackground = NO;
         
-            [FBSession setDefaultAppID:[GRKCONFIG facebookAppId]];
+//            [FBSession setDefaultAppID:[GRKCONFIG facebookAppId]];
             NSArray *permissions = [NSArray arrayWithObjects:@"user_photos", @"user_photo_video_tags", nil];
         
         

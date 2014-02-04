@@ -102,6 +102,24 @@
 }
 
 
+-(void) didSelectImage:(UIImage*)selectedPhoto {
+    
+    if ( selectedPhoto != nil && selectedPhoto != nil){
+        UIImage *selectPhoto = [[UIImage alloc] init];
+        selectPhoto = selectedPhoto;
+    }
+    
+    
+    if ( self.pickerDelegate != nil && [self.pickerDelegate respondsToSelector:@selector(picker:didSelectImage:)]){
+        UIImage *selectPhoto = [[UIImage alloc] init];
+        selectPhoto = selectedPhoto;
+        [(id<GRKPickerViewControllerDelegate>)self.pickerDelegate picker:self didSelectImage:selectPhoto];
+        
+    }
+    
+}
+
+
 
 
 -(BOOL) shouldDeselectPhoto:(GRKPhoto*)deselectedPhoto {

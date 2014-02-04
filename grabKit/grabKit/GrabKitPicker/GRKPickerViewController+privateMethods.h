@@ -61,6 +61,8 @@
 /* Called to notify the GRKPickerViewController that the user selected a photo */
 -(void) didSelectPhoto:(GRKPhoto*)selectedPhoto;
 
+-(void) didSelectImage:(UIImage*)selectedPhoto;
+
 /* Called to notify the GRKPickerViewController that the user deselected a photo */
 -(void) didDeselectPhoto:(GRKPhoto*)deselectedPhoto;
 

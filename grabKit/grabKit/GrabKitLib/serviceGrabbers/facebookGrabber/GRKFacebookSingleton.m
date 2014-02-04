@@ -51,7 +51,7 @@ static GRKFacebookSingleton * sharedFacebook = nil;
     if ((self = [super init]) != nil){
     
 
-        [FBSession setDefaultAppID:[GRKCONFIG facebookAppId]];
+//        [FBSession setDefaultAppID:[GRKCONFIG facebookAppId]];
         
         facebookSession = [FBSession activeSession];
         

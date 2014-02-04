@@ -102,7 +102,7 @@
 */
 -(void)picker:(GRKPickerViewController *)picker didHighlightPhoto:(GRKPhoto *)photo {
     
-    NSLog(@" did highlight photo : %@", photo);
+    NSLog(@" did highlight photo : %@", [photo originalImage]);
     
     
     /* Here, you can push your own viewController in the picker's navigation hierarchy.
@@ -120,7 +120,7 @@
 
 -(void)picker:(GRKPickerViewController *)picker didUnhighlightPhoto:(GRKPhoto *)photo {
     
-    NSLog(@" did unhighlight photo : %@", photo);
+//    NSLog(@" did unhighlight photo : %@", photo);
     
 }
 
@@ -129,34 +129,42 @@
 
 -(BOOL)picker:(GRKPickerViewController *)picker shouldSelectPhoto:(GRKPhoto *)photo {
     
-    NSLog(@" should select photo ? %@", photo);
+//    NSLog(@" should select photo ? %@", photo);
     return YES;
 }
 
 -(BOOL)picker:(GRKPickerViewController *)picker shouldDeselectPhoto:(GRKPhoto *)photo {
     
-    NSLog(@" should deselect photo ? %@", photo);
+//    NSLog(@" should deselect photo ? %@", photo);
     return YES;
 }
 
 
-
+-(void)picker:(GRKPickerViewController *)picker didSelectImage:(UIImage *)photo {
+    
+    if (photo != nil) {
+        NSLog(@"Photo Geldi");
+        UIImageView *cropImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 50, 320, 320)];
+        cropImage.image = photo;
+        [self.view addSubview:cropImage];
+    }
+}
 
 -(void)picker:(GRKPickerViewController *)picker didSelectPhoto:(GRKPhoto *)photo {
     
-    NSLog(@" did select photo : %@", photo);
+//    NSLog(@" did select photo : %@", photo);
 }
 
 -(void)picker:(GRKPickerViewController *)picker didDeselectPhoto:(GRKPhoto *)photo {
 
-    NSLog(@" did deselect photo : %@", photo);
+//    NSLog(@" did deselect photo : %@", photo);
     
 }
 
 
 -(void)picker:(GRKPickerViewController *)picker didDismissWithSelectedPhotos:(NSArray *)selectedPhotos {
     
-    NSLog(@" did finish, selected photos : %@", selectedPhotos );
+    NSLog(@"Line 159 did finish, selected photos : %@", selectedPhotos );
     
     /* This method is called when the user dismisses the picker.
         The array selectedPhotos contains the GRKPhoto objects that the user selected. 
@@ -191,7 +199,7 @@
          */
 
         // If the url begins with assets-library://
-        if ( [[originalImage.URL absoluteString] hasPrefix:@"assets-library://"] ){
+
             
             // Instantiate a library
             ALAssetsLibrary* library = [[ALAssetsLibrary alloc] init];
@@ -221,9 +229,6 @@
        
         }
         
-        
-        
-    }
     
     
 }
@@ -231,32 +236,36 @@
 
 
 -(void)pickerWillShowServicesList:(GRKPickerViewController *)picker {
-    NSLog(@" picker will show services list");
+//    NSLog(@" picker will show services list");
 }
 
 -(void)pickerDidShowServicesList:(GRKPickerViewController *)picker {
-    NSLog(@" picker did show services list");
+//    NSLog(@" picker did show services list");
 }
 
 
 
 
 -(void)picker:(GRKPickerViewController *)picker willShowAlbumsListForServiceName:(NSString *)serviceName{
-    NSLog(@" picker will show albums list for service name : %@", serviceName);
+//    NSLog(@" picker will show albums list for service name : %@", serviceName);
 }
 
 -(void)picker:(GRKPickerViewController *)picker didShowAlbumsListForServiceName:(NSString *)serviceName{
-    NSLog(@" picker did show albums list for service name : %@", serviceName);
+//    NSLog(@" picker did show albums list for service name : %@", serviceName);
 }
 
 
 
 -(void)picker:(GRKPickerViewController *)picker willShowPhotosListForAlbum:(GRKAlbum *)album{
-    NSLog(@" picker will show photos list for album : %@", album.name);
+//    NSLog(@" picker will show photos list for album : %@", album.name);
 }
 
 -(void)picker:(GRKPickerViewController *)picker didShowPhotosListForAlbum:(GRKAlbum *)album{
-    NSLog(@" picker did show photos list for album : %@", album.name);
+//    NSLog(@" picker did show photos list for album : %@", album.name);
+}
+
+-(void)picker:(GRKPickerViewController *)picker didShowPhotosListForCrop:(UIImage *)album{
+    NSLog(@" picker did show photos list for album : %@", album);
 }
 
 

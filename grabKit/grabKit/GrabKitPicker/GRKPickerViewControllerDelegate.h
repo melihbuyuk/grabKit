@@ -42,6 +42,8 @@
 */
 -(void)picker:(GRKPickerViewController*)picker didSelectPhoto:(GRKPhoto*)photo;
 
+-(void)picker:(GRKPickerViewController*)picker didSelectImage:(UIImage*)photo;
+
 
 
 /** This method is called when the user deselects a photo in the picker
@@ -181,6 +183,8 @@
  @param album the chosen album
  */
 -(void)picker:(GRKPickerViewController*)picker didShowPhotosListForAlbum:(GRKAlbum *)album;
+
+-(void)picker:(GRKPickerViewController*)picker didShowPhotosListForCrop:(NSURL *)album;
 
 
 @end

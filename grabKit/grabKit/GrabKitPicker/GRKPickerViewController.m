@@ -27,6 +27,7 @@
 #import "GRKPickerServicesList.h"
 #import "GRKPickerAlbumsList.h"
 #import "GRKPickerPhotosList.h"
+#import "GRKPickerCropViewController.h"
 
 
 GRKPickerViewController * pickerViewControllerSharedInstance = nil;
@@ -216,8 +217,16 @@ GRKPickerViewController * pickerViewControllerSharedInstance = nil;
             [(id<GRKPickerViewControllerDelegate>)self.pickerDelegate picker:self didShowPhotosListForAlbum:album];
             
         }
+    } else if ( [viewController isKindOfClass:[GRKPickerCropViewController class]]) {
         
         
+        // Notify the delegate that the picker did show the list of photos for the given album.
+        if ( self.pickerDelegate != nil && [self.pickerDelegate respondsToSelector:@selector(picker:didShowPhotosListForCrop:)]){
+            
+            NSURL * album = ((GRKPickerCropViewController*)viewController).album;
+            [(id<GRKPickerViewControllerDelegate>)self.pickerDelegate picker:self didShowPhotosListForCrop:album];
+            
+        }
     }
     
     

@@ -453,6 +453,9 @@
 		88D71E7D189E741E00CDFE5C /* social-cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88D71E79189E741E00CDFE5C /* social-cancel@2x.png */; };
 		88D71E80189E76E400CDFE5C /* social-done.png in Resources */ = {isa = PBXBuildFile; fileRef = 88D71E7E189E76E400CDFE5C /* social-done.png */; };
 		88D71E81189E76E400CDFE5C /* social-done@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88D71E7F189E76E400CDFE5C /* social-done@2x.png */; };
+		88E1D02318A113580085EEFD /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E1D02218A113580085EEFD /* ALAssetsLibrary+CustomPhotoAlbum.m */; };
+		88E1D02718A113A90085EEFD /* VPImageCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E1D02618A113A90085EEFD /* VPImageCropperViewController.m */; };
+		88E1D02B18A117EE0085EEFD /* GRKPickerCropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E1D02A18A117EE0085EEFD /* GRKPickerCropViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -941,6 +944,12 @@
 		88D71E79189E741E00CDFE5C /* social-cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "social-cancel@2x.png"; sourceTree = "<group>"; };
 		88D71E7E189E76E400CDFE5C /* social-done.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "social-done.png"; sourceTree = "<group>"; };
 		88D71E7F189E76E400CDFE5C /* social-done@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "social-done@2x.png"; sourceTree = "<group>"; };
+		88E1D02118A113580085EEFD /* ALAssetsLibrary+CustomPhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAssetsLibrary+CustomPhotoAlbum.h"; sourceTree = "<group>"; };
+		88E1D02218A113580085EEFD /* ALAssetsLibrary+CustomPhotoAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAssetsLibrary+CustomPhotoAlbum.m"; sourceTree = "<group>"; };
+		88E1D02518A113A90085EEFD /* VPImageCropperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPImageCropperViewController.h; sourceTree = "<group>"; };
+		88E1D02618A113A90085EEFD /* VPImageCropperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPImageCropperViewController.m; sourceTree = "<group>"; };
+		88E1D02918A117EE0085EEFD /* GRKPickerCropViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRKPickerCropViewController.h; sourceTree = "<group>"; };
+		88E1D02A18A117EE0085EEFD /* GRKPickerCropViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRKPickerCropViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1261,6 +1270,7 @@
 		5F52968016BAB63D007CA510 /* GrabKitPicker */ = {
 			isa = PBXGroup;
 			children = (
+				88E1D02818A117B60085EEFD /* GRKPickerCrop */,
 				5F654F3816C2752B00991DE6 /* GRKPickerViewController.h */,
 				5F654F3916C2752B00991DE6 /* GRKPickerViewController.m */,
 				5FC2547D16E749AF007471D4 /* GRKPickerViewControllerDelegate.h */,
@@ -1383,6 +1393,8 @@
 		5FB1341516AAA3C900BE500B /* submodules */ = {
 			isa = PBXGroup;
 			children = (
+				88E1D02418A113A90085EEFD /* VPImageCropper */,
+				88E1D02018A113580085EEFD /* ALAssetsLibrary-CustomPhotoAlbum */,
 				88D0763D189FD56A008F2B7E /* SEHumanizedTime */,
 				88D07626189F910E008F2B7E /* NZCircularImageView */,
 				88D075FA189F90E4008F2B7E /* SDWebImage */,
@@ -1877,6 +1889,33 @@
 			path = SEHumanizedTime;
 			sourceTree = "<group>";
 		};
+		88E1D02018A113580085EEFD /* ALAssetsLibrary-CustomPhotoAlbum */ = {
+			isa = PBXGroup;
+			children = (
+				88E1D02118A113580085EEFD /* ALAssetsLibrary+CustomPhotoAlbum.h */,
+				88E1D02218A113580085EEFD /* ALAssetsLibrary+CustomPhotoAlbum.m */,
+			);
+			path = "ALAssetsLibrary-CustomPhotoAlbum";
+			sourceTree = "<group>";
+		};
+		88E1D02418A113A90085EEFD /* VPImageCropper */ = {
+			isa = PBXGroup;
+			children = (
+				88E1D02518A113A90085EEFD /* VPImageCropperViewController.h */,
+				88E1D02618A113A90085EEFD /* VPImageCropperViewController.m */,
+			);
+			path = VPImageCropper;
+			sourceTree = "<group>";
+		};
+		88E1D02818A117B60085EEFD /* GRKPickerCrop */ = {
+			isa = PBXGroup;
+			children = (
+				88E1D02918A117EE0085EEFD /* GRKPickerCropViewController.h */,
+				88E1D02A18A117EE0085EEFD /* GRKPickerCropViewController.m */,
+			);
+			name = GRKPickerCrop;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -2299,6 +2338,7 @@
 				5FC684D315BC6C88001F5929 /* myGrabKitConfigurator.m in Sources */,
 				88D07624189F90E4008F2B7E /* UIImage+WebP.m in Sources */,
 				88D0761D189F90E4008F2B7E /* SDWebImageDownloader.m in Sources */,
+				88E1D02318A113580085EEFD /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */,
 				88D07646189FD56A008F2B7E /* NSDate+HumanizedTime.m in Sources */,
 				88D07621189F90E4008F2B7E /* UIButton+WebCache.m in Sources */,
 				88D07618189F90E4008F2B7E /* MKAnnotationView+WebCache.m in Sources */,
@@ -2306,7 +2346,9 @@
 				5FD46C7D16B83A5D00EE496F /* GrabKitDemoHomeViewController.m in Sources */,
 				88D07629189F910E008F2B7E /* NZCircularImageView.m in Sources */,
 				88D07625189F90E4008F2B7E /* UIImageView+WebCache.m in Sources */,
+				88E1D02718A113A90085EEFD /* VPImageCropperViewController.m in Sources */,
 				88D0761F189F90E4008F2B7E /* SDWebImageManager.m in Sources */,
+				88E1D02B18A117EE0085EEFD /* GRKPickerCropViewController.m in Sources */,
 				88D0761C189F90E4008F2B7E /* SDWebImageDecoder.m in Sources */,
 				88D0761A189F90E4008F2B7E /* SDImageCache.m in Sources */,
 			);

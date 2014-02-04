@@ -103,7 +103,7 @@
 		responseBlock_(response);
 	}
 	
-	fileSize_ = [response expectedContentLength];
+	fileSize_ = (int)[response expectedContentLength];
 	
 	[data_ setLength:0];
 	startDate_=[NSDate date];

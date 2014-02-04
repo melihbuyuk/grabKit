@@ -27,6 +27,11 @@
 #import "GRKPickerViewController.h"
 #import "GRKPickerViewController+privateMethods.h"
 
+#import "GRKPickerCropViewController.h"
+
+#import "MBProgressHUD.h"
+
+#define ORIGINAL_MAX_WIDTH 2640.0f
 
 // How many photos the grabber can load at a time
 NSUInteger kNumberOfPhotosPerPage = 32;
@@ -34,7 +39,13 @@ NSUInteger kNumberOfPhotosPerPage = 32;
 NSUInteger kCellWidth = 95;
 NSUInteger kCellHeight = 95;
 
-@interface GRKPickerPhotosList()
+@interface GRKPickerPhotosList() <VPImageCropperDelegate> {
+    NSURL *selectedURL;
+}
+
+@property (nonatomic, readonly) NSURL *selectedURL;
+    -(void)showHUD;
+    -(void)hideHUD;
     -(void) setState:(GRKPickerPhotosListState)newState;
     -(void) loadPage:(NSUInteger)pageIndex;
     -(void) markPageIndexAsLoading:(NSUInteger)pageIndex;
@@ -43,6 +54,7 @@ NSUInteger kCellHeight = 95;
 @end
 
 @implementation GRKPickerPhotosList
+@synthesize selectedURL;
 
 @synthesize album = _album;
 
@@ -79,7 +91,7 @@ NSUInteger kCellHeight = 95;
         UIButton *buttonclose = [UIButton buttonWithType:UIButtonTypeCustom];
         [buttonclose setImage:buttonCancel forState:UIControlStateNormal];
         buttonclose.frame = CGRectMake(0, 0, buttonCancel.size.width, buttonCancel.size.height);
-        [buttonclose addTarget:self action:@selector(didTouchDoneButton) forControlEvents:UIControlEventTouchUpInside];
+        [buttonclose addTarget:self action:@selector(didTouchCancelButton) forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem *cancelBarItem = [[UIBarButtonItem alloc] initWithCustomView:buttonclose];
 
         UIImage *buttonDoneImage = [UIImage imageNamed:@"social-done.png"];
@@ -304,10 +316,61 @@ withNumberOfPhotosPerPage:kNumberOfPhotosPerPage
     
 }
 
--(void) didTouchDoneButton {
+-(void)showHUD
+{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.labelText = @"Yukleniyor...";
+    
+}
 
+-(void)hideHUD {
+    [MBProgressHUD  hideHUDForView:self.view animated:YES];
+}
+
+-(void) didTouchCancelButton {
+    
     [[GRKPickerViewController sharedInstance] dismiss];
     
+}
+
+-(void) didTouchDoneButton {
+
+    [self showHUD];
+    
+    UIImage *portraitImg = [UIImage imageWithData:[NSData dataWithContentsOfURL:selectedURL]];
+	portraitImg = [self imageByScalingToMaxSize:portraitImg];
+    // present the cropper view controller
+    VPImageCropperViewController *imgCropperVC = [[VPImageCropperViewController alloc] initWithImage:portraitImg
+                                                                                           cropFrame:CGRectMake(0,
+                                                                                                                100.0f,
+                                                                                                                self.view.frame.size.width,
+                                                                                                                self.view.frame.size.width)
+                                                                                     limitScaleRatio:3.0];
+    imgCropperVC.delegate = self;
+    
+    [self presentViewController:imgCropperVC animated:NO completion:^{
+        [self hideHUD];
+    }];
+    
+}
+
+#pragma mark VPImageCropperDelegate
+- (void)imageCropper:(VPImageCropperViewController *)cropperViewController didFinished:(UIImage *)editedImage {
+    [cropperViewController dismissViewControllerAnimated:NO completion:^{
+        
+        [[GRKPickerViewController sharedInstance] didSelectImage:editedImage];
+        [[GRKPickerViewController sharedInstance] dismiss];
+    
+    }];
+}
+
+- (void)imageCropperDidCancel:(VPImageCropperViewController *)cropperViewController {
+    [cropperViewController dismissViewControllerAnimated:YES completion:^{
+    
+    }];
+    
+//    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 
@@ -602,6 +665,8 @@ withNumberOfPhotosPerPage:kNumberOfPhotosPerPage
 
 	GRKPhoto * selectedPhoto =  [self photoForCellAtIndexPath:indexPath];
     
+    NSLog(@"Line Number : (605) %@",[[selectedPhoto originalImage] URL]);
+    
     // Only allow selection of items for already-loaded photos.
     if ( selectedPhoto == nil ){
         return NO;
@@ -649,6 +714,7 @@ withNumberOfPhotosPerPage:kNumberOfPhotosPerPage
     
     [[GRKPickerViewController sharedInstance] didSelectPhoto:selectedPhoto];
     
+    selectedURL = [[selectedPhoto originalImage] URL];    
     [self updateRightBarButtonItem];
     
 }
@@ -666,6 +732,72 @@ withNumberOfPhotosPerPage:kNumberOfPhotosPerPage
 //    }
     
     
+}
+
+#pragma mark image scale utility
+- (UIImage *)imageByScalingToMaxSize:(UIImage *)sourceImage {
+    if (sourceImage.size.width < ORIGINAL_MAX_WIDTH) return sourceImage;
+    CGFloat btWidth = 0.0f;
+    CGFloat btHeight = 0.0f;
+    if (sourceImage.size.width > sourceImage.size.height) {
+        btHeight = ORIGINAL_MAX_WIDTH;
+        btWidth = sourceImage.size.width * (ORIGINAL_MAX_WIDTH / sourceImage.size.height);
+    } else {
+        btWidth = ORIGINAL_MAX_WIDTH;
+        btHeight = sourceImage.size.height * (ORIGINAL_MAX_WIDTH / sourceImage.size.width);
+    }
+    CGSize targetSize = CGSizeMake(1920, 1080);
+    return [self imageByScalingAndCroppingForSourceImage:sourceImage targetSize:targetSize];
+}
+
+- (UIImage *)imageByScalingAndCroppingForSourceImage:(UIImage *)sourceImage targetSize:(CGSize)targetSize {
+    UIImage *newImage = nil;
+    CGSize imageSize = sourceImage.size;
+    CGFloat width = imageSize.width;
+    CGFloat height = imageSize.height;
+    CGFloat targetWidth = targetSize.width;
+    CGFloat targetHeight = targetSize.height;
+    CGFloat scaleFactor = 0.0;
+    CGFloat scaledWidth = targetWidth;
+    CGFloat scaledHeight = targetHeight;
+    CGPoint thumbnailPoint = CGPointMake(0.0,0.0);
+    if (CGSizeEqualToSize(imageSize, targetSize) == NO)
+    {
+        CGFloat widthFactor = targetWidth / width;
+        CGFloat heightFactor = targetHeight / height;
+        
+        if (widthFactor > heightFactor)
+            scaleFactor = widthFactor; // scale to fit height
+        else
+            scaleFactor = heightFactor; // scale to fit width
+        scaledWidth  = width * scaleFactor;
+        scaledHeight = height * scaleFactor;
+        
+        // center the image
+        if (widthFactor > heightFactor)
+        {
+            thumbnailPoint.y = (targetHeight - scaledHeight) * 0.5;
+        }
+        else
+            if (widthFactor < heightFactor)
+            {
+                thumbnailPoint.x = (targetWidth - scaledWidth) * 0.5;
+            }
+    }
+    UIGraphicsBeginImageContext(targetSize); // this will crop
+    CGRect thumbnailRect = CGRectZero;
+    thumbnailRect.origin = thumbnailPoint;
+    thumbnailRect.size.width  = scaledWidth;
+    thumbnailRect.size.height = scaledHeight;
+    
+    [sourceImage drawInRect:thumbnailRect];
+    
+    newImage = UIGraphicsGetImageFromCurrentImageContext();
+    if(newImage == nil) NSLog(@"could not scale image");
+    
+    //pop the context to get back to the default
+    UIGraphicsEndImageContext();
+    return newImage;
 }
 
 

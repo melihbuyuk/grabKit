@@ -57,7 +57,7 @@ typedef NSUInteger GRKPickerPhotosListState;
  
  
  */
-@interface GRKPickerPhotosList : UIViewController<UICollectionViewDataSource, UICollectionViewDelegate > {
+@interface GRKPickerPhotosList : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate > {
     
     UICollectionView * _collectionView;
 
