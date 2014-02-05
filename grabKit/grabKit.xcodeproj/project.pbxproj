@@ -1091,6 +1091,7 @@
 		5F3C2CB815B9F945008D894A /* GrabKitLib */ = {
 			isa = PBXGroup;
 			children = (
+				88E1D02418A113A90085EEFD /* VPImageCropper */,
 				5FA4911315C3C3540000DADB /* GrabKit.h */,
 				5F3C2CBB15B9F945008D894A /* GRKConstants.h */,
 				5F3C2CBC15B9F945008D894A /* GRKConstants.m */,
@@ -1393,7 +1394,6 @@
 		5FB1341516AAA3C900BE500B /* submodules */ = {
 			isa = PBXGroup;
 			children = (
-				88E1D02418A113A90085EEFD /* VPImageCropper */,
 				88E1D02018A113580085EEFD /* ALAssetsLibrary-CustomPhotoAlbum */,
 				88D0763D189FD56A008F2B7E /* SEHumanizedTime */,
 				88D07626189F910E008F2B7E /* NZCircularImageView */,
@@ -1904,7 +1904,8 @@
 				88E1D02518A113A90085EEFD /* VPImageCropperViewController.h */,
 				88E1D02618A113A90085EEFD /* VPImageCropperViewController.m */,
 			);
-			path = VPImageCropper;
+			name = VPImageCropper;
+			path = ../submodules/VPImageCropper;
 			sourceTree = "<group>";
 		};
 		88E1D02818A117B60085EEFD /* GRKPickerCrop */ = {
