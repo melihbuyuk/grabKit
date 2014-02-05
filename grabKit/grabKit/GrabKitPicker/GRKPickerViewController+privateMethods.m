@@ -197,8 +197,7 @@
             [(id<GRKPickerViewControllerDelegate>)self.pickerDelegate picker:self didDismissWithSelectedPhotos:[_selectedPhotos allValues]];
             
         }
-        
-        
+
         if ( ! self.keepsSelection ){
             
             [_selectedPhotos removeAllObjects];
